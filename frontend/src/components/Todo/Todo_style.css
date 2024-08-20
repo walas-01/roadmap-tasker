@@ -6,7 +6,7 @@
 
 
 
-  border: solid 5px #E23838;
+  border: solid 5px #32AD6F;
   border-radius: 8px;
 }
 
@@ -16,11 +16,7 @@
 
   font-size: x-large;
   color: var(--backcolor-black);
-  background-color:#E23838;
+  background-color:#32AD6F;
 }
 
-
-.todoCard-body{
-  
-}
 

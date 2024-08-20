@@ -8,7 +8,7 @@ import './BoardPage_style.css'
 
 // --------- components import
 import Todo from '../components/Todo/Todo.jsx'
-
+import DeleteArea from '../components/DeleteArea/DeleteArea.jsx'
 
 
 // --------- mackup data
@@ -33,23 +33,26 @@ function BoardPage(){
   const [taskList,setTaskList] = useState(TASK_DATA)
   const [groupList,setGroupList] = useState(GROUP_DATA)
   
+  const [activeCard,setActiveCard] = useState(null)
+
 
   return(
     <main className='boardPage'>
 
-    <section className='sideBar'>
-      
-      <Todo/>
+      <section className='sideBar'>
+        
+        <DeleteArea activeCard={activeCard}/>
 
-    </section>
+      </section>
 
 
 
-    <section className='board'>
-      {groupList.map((group,index)=>{return <GroupCard key={index} tittle={group.tittle} id={group.id} taskList={taskList}/>})}
+      <section className='board'>
+        {groupList.map((group,index)=>{return <GroupCard key={index} tittle={group.tittle} id={group.id} taskList={taskList} setActiveCard={setActiveCard}/>})}
 
-    </section>
+      </section>
 
+      <h1>ActiveCard {activeCard}</h1>
     </main>
   )
 }

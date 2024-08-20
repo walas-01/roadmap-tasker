@@ -1,10 +1,17 @@
 .taskCard{
-  padding: 10px;
+  padding: 6px;
 
   display: flex;
   align-items: center;
   gap: 0.5rem;
 
-  background-color: rgb(64, 49, 78);
+  background-color: #40314e;
+  border: solid 2px #40314e;
   border-radius: 5px;
+  cursor: grab;
+}
+
+.taskCard:active{
+  border: solid 2px var(--color1);
+  background-color: #2a2135;
 }

@@ -1,23 +1,25 @@
 .groupCard{
     width: 90%;
-    margin: 10px 0;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
 
 .groupCard-tittle{
-    width: 100%;
     padding: 10px 15px;
 
     display: flex;
     align-items: center;
     gap: 10px;
 
-    font-size: medium;
+    font-size: large;
+    color:var(--backcolor-black);
     background-color: var(--color1);
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
 }
 
 .groupCard-taskList{
+  width: 95%;
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -26,3 +28,7 @@
     margin-left: 2rem;
 }
 
+
+.activeGroup{
+  background-color: #1F1F33;
+}
