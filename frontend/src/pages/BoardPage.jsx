@@ -33,8 +33,15 @@ function BoardPage(){
   const [taskList,setTaskList] = useState(TASK_DATA)
   const [groupList,setGroupList] = useState(GROUP_DATA)
   
+  //? THIS IS THE PART WHERE WE FETCH DATA (axios) FROM DATABASE AND SET THE STATES
+
   const [activeCard,setActiveCard] = useState(null)
 
+
+  // moving tasks to other groups
+  const moveTask = (taskId,position)=>{
+    console.log(`[Board]: moviendo task: '${activeCard}' a groupId: ${taskId} a posición: ${position}`)
+  }
 
   return(
     <main className='boardPage'>
@@ -48,11 +55,20 @@ function BoardPage(){
 
 
       <section className='board'>
-        {groupList.map((group,index)=>{return <GroupCard key={index} tittle={group.tittle} id={group.id} taskList={taskList} setActiveCard={setActiveCard}/>})}
+        {groupList.map((group,index)=>{
+          return (
 
+            <GroupCard 
+              key={index} 
+              tittle={group.tittle} 
+              id={group.id} 
+              taskList={taskList} 
+              setActiveCard={setActiveCard}
+              moveTask={moveTask}
+            />
+
+          )})}
       </section>
-
-      <h1>ActiveCard {activeCard}</h1>
     </main>
   )
 }
