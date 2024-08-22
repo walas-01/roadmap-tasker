@@ -8,8 +8,10 @@ import TaskCard from '../TaskCard/TaskCard.jsx'
 import DropArea from '../DropArea/DropArea.jsx'
 
 
-function GroupCard({tittle, id, taskList, setActiveCard,moveTask}){
+function GroupCard({groupObject, setActiveCard,moveTask}){
   const [active,setActive] = useState(false)
+
+  const {tittle,tasks} = groupObject
 
   //* const groupTasks = taskList.filter((t)=> t.groupId == id)
 
@@ -20,9 +22,7 @@ function GroupCard({tittle, id, taskList, setActiveCard,moveTask}){
 
       <ul className='groupCard-taskList'>
         
-        {taskList.map((t,index)=>{
-          if(t.groupId == id){
-
+        {tasks.map((t,index)=>{
           return (
               <React.Fragment key={index}>
                 <TaskCard id={t.id} tittle={t.tittle}  setActiveCard={setActiveCard} /> 
@@ -30,7 +30,7 @@ function GroupCard({tittle, id, taskList, setActiveCard,moveTask}){
               </React.Fragment>
           )
           
-        }})}
+        })}
 
       </ul>
 

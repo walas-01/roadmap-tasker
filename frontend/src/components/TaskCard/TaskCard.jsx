@@ -8,7 +8,7 @@ function TaskCard({id,tittle,setActiveCard}){
 
   // ---------- event handlers
   const handleDragStart = (e)=>{
-    setActiveCard(tittle)
+    setActiveCard(id)
   }
   const handleDragEnd = (e)=>{
     setActiveCard(null)
