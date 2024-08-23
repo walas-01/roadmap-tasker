@@ -11,7 +11,7 @@ import DropArea from '../DropArea/DropArea.jsx'
 function GroupCard({groupObject, setActiveCard,moveTask}){
   const [active,setActive] = useState(false)
 
-  const {tittle,tasks} = groupObject
+  const {group_id,tittle,tasks} = groupObject
 
   //* const groupTasks = taskList.filter((t)=> t.groupId == id)
 
@@ -25,13 +25,13 @@ function GroupCard({groupObject, setActiveCard,moveTask}){
         {tasks.map((t,index)=>{
           return (
               <React.Fragment key={index}>
-                <TaskCard id={t.id} tittle={t.tittle}  setActiveCard={setActiveCard} /> 
-                <DropArea groupId={t.groupId} position={index+1} moveTask={moveTask}/>
+                <TaskCard taskObject={t}  setActiveCard={setActiveCard} /> 
+                <DropArea groupId={t.ownerGroup_id} position={index+1} moveTask={moveTask}/>
               </React.Fragment>
           )
           
         })}
-
+        <p>+ Add new task </p>
       </ul>
 
     </div>
