@@ -4,7 +4,7 @@ import { FaRegTrashCan } from "react-icons/fa6";
 
 import './DeleteArea_style.css'
 
-function DeleteArea({activeCard}){
+function DeleteArea({activeCard,removeTask}){
   const [active,setActive] = useState(false)
 
   //------------------ event handlers
@@ -20,6 +20,7 @@ function DeleteArea({activeCard}){
 
   const handleDrop = (e)=>{
     console.log('[daleteArea]: i want to delete ', activeCard)
+    removeTask()
     setActive(false)
   }
 

@@ -7,8 +7,11 @@ import { MdOutlineCircle } from "react-icons/md"
 import TaskCard from '../TaskCard/TaskCard.jsx'
 import DropArea from '../DropArea/DropArea.jsx'
 
+import { CreateTask } from './CreateArea/CreateArea.jsx'
 
-function GroupCard({groupObject, setActiveCard,moveTask}){
+
+
+function GroupCard({groupObject, setActiveCard,moveTask,createNewTask}){ // ----------------------------- [ GroupComponent ] -
   const [active,setActive] = useState(false)
 
   const {group_id,tittle,tasks} = groupObject
@@ -31,9 +34,10 @@ function GroupCard({groupObject, setActiveCard,moveTask}){
           )
           
         })}
-        <p>+ Add new task </p>
+
       </ul>
 
+      <CreateTask group_id={group_id} createNewTask={createNewTask}/>
     </div>
   )
 }

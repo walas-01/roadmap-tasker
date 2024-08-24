@@ -29,42 +29,41 @@ const GROUP_DATA = [
   ]}
 ]
 
-// ------------------------------------------------------------------------------ functions
-
-const removeTaskFromGroup = (groupList,taskObject)=>{
-  //1)get original Group
-  const originalGroup =  groupList.find(group => group.group_id === taskObject.ownerGroup_id)
-
-  //2)search for moved task in originalGroup and remove it from the list
-  originalGroup.tasks = originalGroup.tasks.filter(task => task.task_id !== taskObject.task_id)
-
-  const updatedGroupList = groupList.map( group => {
-    if( group.group_id === originalGroup.group_id ){
-     return originalGroup 
-    }else{
-     return group
-    }
-  })
-
-  //todo: UPDATE Group TO DATA BASE
-  
-  return updatedGroupList
-}
-
-
-
 function BoardPage(){ // --------------------------------------------------------------------------- [ BoardPage COMPONENT ]
   const [groupList,setGroupList] = useState(GROUP_DATA)
   
   ////todo: THIS IS THE PART WHERE WE FETCH DATA (with axios) FROM DATABASE AND SET THE STATES
   const [activeCard,setActiveCard] = useState(null)
 
-  //---------- moving tasks to other groups
+  // ----------------------------- methods
+
+  const removeTask = ()=>{
+    //1)get original Group
+    const originalGroup =  groupList.find(group => group.group_id === activeCard.ownerGroup_id)
+  
+    //2)search for moved task in originalGroup and remove it from the list
+    originalGroup.tasks = originalGroup.tasks.filter(task => task.task_id !== activeCard.task_id)
+  
+    const updatedGroupList = groupList.map( group => {
+      if( group.group_id === originalGroup.group_id ){
+       return originalGroup 
+      }else{
+       return group
+      }
+    })
+  
+    //todo: UPDATE Group TO DATA BASE
+    
+    return updatedGroupList
+  }
+
+
+  //------------------------------------------------ moving tasks to other groups
   const moveTask = (groupTargetId,position)=>{
     console.log(`[Board]: moviendo task: '${activeCard.tittle}' a groupId: ${groupTargetId} a posición: ${position}`)
 
     // 1) remove task from group AND update state
-    let updatedGroupList = removeTaskFromGroup(groupList,activeCard)
+    let updatedGroupList = removeTask()
     setGroupList(updatedGroupList)
 
     //2)get target Group
@@ -90,6 +89,30 @@ function BoardPage(){ // -------------------------------------------------------
     setGroupList(updatedGroupList)
   }
 
+  //------------------------------------------------ create new task in a group
+  const createNewTask = (tittle,ownerGroup_id)=>{
+
+    //1) construct taskObject AND generate task_id
+    const taskObject = {task_id:Date.now().toString(),tittle,ownerGroup_id}
+
+    //2)get target Group
+    const targetGroup = groupList.find(group => group.group_id === ownerGroup_id )
+
+    //3)add taskObject to the new group at appropiate index
+    targetGroup.tasks.splice(targetGroup.tasks.length,0,taskObject)
+
+    //4)update state
+    let updatedGroupList = groupList.map( group => {
+      if( group.group_id === targetGroup.group_id ){
+       return targetGroup 
+      }else{
+       return group
+      }
+    })
+
+    setGroupList(updatedGroupList)
+  }
+
   useEffect(()=>{
     console.log(groupList)
   },[groupList])
@@ -97,7 +120,7 @@ function BoardPage(){ // -------------------------------------------------------
   return (
     <main className="boardPage">
       <section className="sideBar">
-        <DeleteArea activeCard={activeCard} />
+        <DeleteArea activeCard={activeCard} removeTask={removeTask}/>
       </section>
 
       <section className="board">
@@ -108,6 +131,7 @@ function BoardPage(){ // -------------------------------------------------------
               groupObject={group}
               setActiveCard={setActiveCard}
               moveTask={moveTask}
+              createNewTask={createNewTask}
             />
           );
         })}
