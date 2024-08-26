@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import './CreateArea_style.css'
 
-
 function CreateNewTaskForm({setTittle,setIsAdding,goAndCreateTask}){ //--------------------------------------------- [ CreateArea ] -
   const handleSubmit = (e)=>{
     e.preventDefault()
@@ -21,7 +20,6 @@ function CreateNewTaskForm({setTittle,setIsAdding,goAndCreateTask}){ //---------
   )
 }
 
-
 function CreateNewTaskButton({setIsAdding}){ //-------------------- [ CreateNewTaskButton ] -
   return(
     <button className='createButton' onClick={()=>{setIsAdding(true)}}>
@@ -29,7 +27,6 @@ function CreateNewTaskButton({setIsAdding}){ //-------------------- [ CreateNewT
     </button>
   )
 }
-
 
 function CreateTask({createNewTask,group_id}){
   const [tittle,setTittle] = useState("")
@@ -39,7 +36,6 @@ function CreateTask({createNewTask,group_id}){
     if(!tittle.trim().length){return} // cancel if is empty
     createNewTask(tittle,group_id)
   }
-
 
   return(
     <>

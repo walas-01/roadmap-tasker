@@ -24,12 +24,12 @@ function GroupCard({groupObject, setActiveCard,moveTask,createNewTask}){ // ----
       <h3 className="groupCard-tittle"><MdOutlineCircle size={20}/>{tittle}</h3>
 
       <ul className='groupCard-taskList'>
-        
+        <DropArea groupId={group_id} position={0} moveTask={moveTask}/>
         {tasks.map((t,index)=>{
           return (
               <React.Fragment key={index}>
                 <TaskCard taskObject={t}  setActiveCard={setActiveCard} /> 
-                <DropArea groupId={t.ownerGroup_id} position={index+1} moveTask={moveTask}/>
+                <DropArea groupId={group_id} position={index+1} moveTask={moveTask}/>
               </React.Fragment>
           )
           

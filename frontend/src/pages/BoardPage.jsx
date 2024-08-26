@@ -8,13 +8,13 @@ import './BoardPage_style.css'
 
 
 // --------- components import
-import Todo from '../components/Todo/Todo.jsx'
+import Todo from '../components/TodoBlock/TodoBlock.jsx'
 import DeleteArea from '../components/DeleteArea/DeleteArea.jsx'
 
 
 // ----------------------------------------------------------------------------- mackup data
 const GROUP_DATA = [
-  {group_id:'a1b2c3',tittle:'React Introduction',tasks:[
+  {group_id:'a1b2c3',tittle:'Introduction to React',tasks:[
     {task_id:'one123',ownerGroup_id:'a1b2c3',tittle:'Origins Of React'},
     {task_id:'two234',ownerGroup_id:'a1b2c3',tittle:'Why React?'},
     {task_id:'three345',ownerGroup_id:'a1b2c3',tittle:'DOM and Virtual DOM'},
