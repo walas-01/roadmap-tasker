@@ -1,5 +1,7 @@
-import { useState } from 'react'
+import { useState,useContext } from 'react'
 import './CreateArea_style.css'
+
+import { GlobalContext } from '../../../pages/BoardPage/Context/BoardContext'
 
 function CreateNewTaskForm({tittle,setTittle,setIsAdding,goAndCreateTask}){ //--------------------------------------------- [ CreateArea ] -
   const handleSubmit = (e)=>{
@@ -33,9 +35,11 @@ function CreateNewTaskButton({setIsAdding}){ //-------------------- [ CreateNewT
   )
 }
 
-function CreateTask({createNewTask,group_id}){
+function CreateTask({group_id}){
   const [tittle,setTittle] = useState("")
   const [isAdding,setIsAdding] = useState(false)
+
+  const {createNewTask} = useContext(GlobalContext)
 
   const goAndCreateTask = ()=>{
     createNewTask(tittle,group_id)

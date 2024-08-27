@@ -11,7 +11,7 @@ import { CreateTask } from './CreateArea/CreateArea.jsx'
 
 
 
-function GroupCard({groupObject, setActiveCard,createNewTask}){ // ----------------------------- [ GroupComponent ] -
+function GroupCard({groupObject}){ // ----------------------------- [ GroupComponent ] -
   const [active,setActive] = useState(false)
 
   const {group_id,tittle,tasks} = groupObject
@@ -28,7 +28,7 @@ function GroupCard({groupObject, setActiveCard,createNewTask}){ // -------------
         {tasks.map((t,index)=>{
           return (
               <React.Fragment key={index}>
-                <TaskCard taskObject={t}  setActiveCard={setActiveCard} /> 
+                <TaskCard taskObject={t} /> 
                 <DropArea groupId={group_id} position={index+1} />
               </React.Fragment>
           )
@@ -37,7 +37,7 @@ function GroupCard({groupObject, setActiveCard,createNewTask}){ // -------------
 
       </ul>
 
-      <CreateTask group_id={group_id} createNewTask={createNewTask}/>
+      <CreateTask group_id={group_id}/>
     </div>
   )
 }

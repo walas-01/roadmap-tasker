@@ -1,11 +1,10 @@
 import { useState, useContext } from 'react'
 import './DropArea_style.css'
-import {Context} from '../../pages/BoardPage/BoardPage.jsx'
+import { GlobalContext } from '../../pages/BoardPage/Context/BoardContext.jsx' 
 
 function DropArea({groupId,position}){
   const [active,setActive] = useState(false)
-  const {moveTask} = useContext(Context)
-
+  const {moveTask} = useContext(GlobalContext)
 
   //------------------ event handlers
   const handleDragOver = (e)=>{

@@ -1,12 +1,13 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { GoGrabber } from "react-icons/go"
 import './TaskCard_style.css'
+import { GlobalContext } from '../../pages/BoardPage/Context/BoardContext'; 
 
 import { ImCheckboxUnchecked,ImCheckboxChecked } from "react-icons/im";
 
-function TaskCard({taskObject,setActiveCard}){
-
+function TaskCard({taskObject}){
   const {task_id,tittle,isDone} = taskObject
+  const {setActiveCard} = useContext(GlobalContext)
 
   // ---------- event handlers
   const handleDragStart = (e)=>{

@@ -1,6 +1,7 @@
-import { useEffect, useState, createContext} from 'react'
+import { useContext, useEffect, useState} from 'react'
 import React from 'react'
 import GroupCard from '../../components/GroupCard/GroupCard.jsx'
+import { ContextBoard,GlobalContext } from './Context/BoardContext.jsx'
 
 import './BoardPage_style.css'
 
@@ -26,119 +27,38 @@ const GROUP_DATA = [
 ]
 
 
-const Context = createContext(); // create the context to be provided
-
-
-function BoardPage(){ // --------------------------------------------------------------------------- [ BoardPage COMPONENT ]
-  const [groupList,setGroupList] = useState(GROUP_DATA)
-  
-  ////todo: THIS IS THE PART WHERE WE FETCH DATA (with axios) FROM DATABASE AND SET THE STATES
-  
-  const [activeCard,setActiveCard] = useState(null)
-
-  //? ----------------------------- methods
-
-  const removeTask = ()=>{ //------------------------------------- removing a task from its group
-    //1)get original Group
-    const originalGroup =  groupList.find(group => group.group_id === activeCard.ownerGroup_id)
-  
-    //2)search for moved task in originalGroup and remove it from the list
-    originalGroup.tasks = originalGroup.tasks.filter(task => task.task_id !== activeCard.task_id)
-  
-    const updatedGroupList = groupList.map( group => {
-      if( group.group_id === originalGroup.group_id ){
-       return originalGroup 
-      }else{
-       return group
-      }
-    })
-  
-    //todo: UPDATE Group TO DATA BASE
-    
-    return updatedGroupList
-  }
+function BoardPage(){ // --------------------------------------------------------------------------- [ BoardPage COMPONENT ]  
+  const {groupList,setGroupList} = useContext(GlobalContext)
 
   
-  const moveTask = (groupTargetId,position)=>{ //--------------------- moving tasks to other groups
-    // 1) remove task from group AND update state
-    let updatedGroupList = removeTask()
-    setGroupList(updatedGroupList)
-
-    //2)get target Group
-    const targetGroup = groupList.find(group => group.group_id === groupTargetId )
-    console.log(targetGroup)
-
-    //3)update taskObject owner id
-    const taskObject = activeCard
-    taskObject.ownerGroup_id = groupTargetId
-
-    //4)add taskObject to the new group at appropiate index
-    targetGroup.tasks.splice(position,0,taskObject)
-
-    //5)update state
-    updatedGroupList = groupList.map( group => {
-      if( group.group_id === targetGroup.group_id ){
-       return targetGroup 
-      }else{
-       return group
-      }
-    })
-
-    setGroupList(updatedGroupList)
-  }
-
-  
-  const createNewTask = (tittle,ownerGroup_id)=>{ //-------- create new task in a group
-
-    //1) construct taskObject AND generate task_id
-    const taskObject = {task_id:Date.now().toString(),tittle,ownerGroup_id}
-
-    //2)get target Group
-    const targetGroup = groupList.find(group => group.group_id === ownerGroup_id )
-
-    //3)add taskObject to the new group at appropiate index
-    targetGroup.tasks.splice(targetGroup.tasks.length,0,taskObject)
-
-    //4)update state
-    let updatedGroupList = groupList.map( group => {
-      if( group.group_id === targetGroup.group_id ){
-       return targetGroup 
-      }else{
-       return group
-      }
-    })
-    setGroupList(updatedGroupList)
-  }
-
   useEffect(()=>{ // ------------------- useEffect
+    ////todo: THIS IS THE PART WHERE WE FETCH DATA (with axios) FROM DATABASE AND SET THE STATES
+    setGroupList(GROUP_DATA)
+
+    console.log("[ GroupList ] --------------------")
     console.log(groupList)
   },[groupList])
 
-  return (
-    <Context.Provider value={{moveTask}} >
-      <main className="boardPage">
 
-        <section className="sideBar">
-          <DeleteArea activeCard={activeCard} removeTask={removeTask}/>
-        </section>
+  return ( ///--------------------------- (return)
+    <main className="boardPage">
+      <section className="sideBar">
+        <DeleteArea />
+      </section>
 
-        <section className="board">
-          {groupList.map((group, index) => {
-            return (
-              <GroupCard
-                key={index}
-                groupObject={group}
-                setActiveCard={setActiveCard}
-                createNewTask={createNewTask}
-              />
-            );
-          })}
-        </section>
-
-      </main>
-    </Context.Provider>
+      <section className="board">
+        {groupList.map((group, index) => {
+          return (
+            <GroupCard
+              key={index}
+              groupObject={group}
+            />
+          );
+        })}
+      </section>
+    </main>
   );
 }
 
 
-export { BoardPage, Context}
+export { BoardPage }

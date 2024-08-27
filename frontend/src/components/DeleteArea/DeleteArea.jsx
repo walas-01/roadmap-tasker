@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaTrashCan } from "react-icons/fa6"
 import { FaRegTrashCan } from "react-icons/fa6";
+import { GlobalContext } from "../../pages/BoardPage/Context/BoardContext";
 
 import './DeleteArea_style.css'
 
-function DeleteArea({activeCard,removeTask}){
+function DeleteArea(){
   const [active,setActive] = useState(false)
+  const {removeTask,activeCard} = useContext(GlobalContext)
 
   //------------------ event handlers
   const handleDragOver = (e)=>{
