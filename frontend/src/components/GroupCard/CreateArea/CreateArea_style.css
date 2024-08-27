@@ -8,7 +8,7 @@
   padding: 0.8rem;
 
   resize: vertical;
-  border: solid 1px var(--color1);
+  border: solid 3px var(--color1);
   border-radius: 5px;
   background-color: #29173f;
   color: white;

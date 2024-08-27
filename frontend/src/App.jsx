@@ -2,7 +2,7 @@ import React from 'react'
 
 
 // --- Pages
-import BoardPage from './pages/BoardPage.jsx'
+import { BoardPage } from './pages/BoardPage/BoardPage.jsx'
 
 
 function App(){

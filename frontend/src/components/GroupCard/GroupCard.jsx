@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './GroupCard_style.css'
 
-import { MdOutlineCircle } from "react-icons/md"
+import { MdRadioButtonUnchecked,MdRadioButtonChecked } from "react-icons/md";
 
 // import components
 import TaskCard from '../TaskCard/TaskCard.jsx'
@@ -11,7 +11,7 @@ import { CreateTask } from './CreateArea/CreateArea.jsx'
 
 
 
-function GroupCard({groupObject, setActiveCard,moveTask,createNewTask}){ // ----------------------------- [ GroupComponent ] -
+function GroupCard({groupObject, setActiveCard,createNewTask}){ // ----------------------------- [ GroupComponent ] -
   const [active,setActive] = useState(false)
 
   const {group_id,tittle,tasks} = groupObject
@@ -21,15 +21,15 @@ function GroupCard({groupObject, setActiveCard,moveTask,createNewTask}){ // ----
   return( // ------------------------------------- return
     <div className={`groupCard ${active? 'activeGroup':''} `}>
 
-      <h3 className="groupCard-tittle"><MdOutlineCircle size={20}/>{tittle}</h3>
+      <h3 className="groupCard-tittle"><MdRadioButtonUnchecked size={24}/>{tittle}</h3>
 
       <ul className='groupCard-taskList'>
-        <DropArea groupId={group_id} position={0} moveTask={moveTask}/>
+        <DropArea groupId={group_id} position={0} />
         {tasks.map((t,index)=>{
           return (
               <React.Fragment key={index}>
                 <TaskCard taskObject={t}  setActiveCard={setActiveCard} /> 
-                <DropArea groupId={group_id} position={index+1} moveTask={moveTask}/>
+                <DropArea groupId={group_id} position={index+1} />
               </React.Fragment>
           )
           

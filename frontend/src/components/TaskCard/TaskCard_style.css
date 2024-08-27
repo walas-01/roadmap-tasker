@@ -1,12 +1,14 @@
 .taskCard{
-  padding: 6px;
+  padding: 4px;
 
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1rem;
 
-  background-color: #40314e;
-  border: solid 2px #40314e;
+  word-break: break-all;
+
+  background-color: #353063;
+  border: solid 2px #353063;
   border-radius: 5px;
   cursor: grab;
 }
@@ -14,4 +16,26 @@
 .taskCard:active{
   border: solid 2px var(--color1);
   background-color: #2a2135;
+}
+
+.taskCard-icons{
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.taskCard-icons button{
+  color: white;
+  background:none;
+  border: none;
+  cursor: pointer;
+}
+
+.doneTask{
+  background-color: #231D3A;
+  border: solid 2px #231D3A;
+  color: #b1b1b1;
+  text-decoration: line-through;
 }

@@ -1,10 +1,15 @@
 import { useState } from 'react'
 import './CreateArea_style.css'
 
-function CreateNewTaskForm({setTittle,setIsAdding,goAndCreateTask}){ //--------------------------------------------- [ CreateArea ] -
+function CreateNewTaskForm({tittle,setTittle,setIsAdding,goAndCreateTask}){ //--------------------------------------------- [ CreateArea ] -
   const handleSubmit = (e)=>{
     e.preventDefault()
-    // CREATE NEW TASK (send to board)
+
+    if(!tittle.trim().length){return} // cancel if is empty
+    if(tittle.length > 100){
+      alert("Task's Tittle can not have more than a 100 characters!")
+      return
+    }
     goAndCreateTask()
     setIsAdding(false)
   }
@@ -33,13 +38,12 @@ function CreateTask({createNewTask,group_id}){
   const [isAdding,setIsAdding] = useState(false)
 
   const goAndCreateTask = ()=>{
-    if(!tittle.trim().length){return} // cancel if is empty
     createNewTask(tittle,group_id)
   }
 
   return(
     <>
-      {isAdding ? <CreateNewTaskForm setTittle={setTittle} setIsAdding={setIsAdding} goAndCreateTask={goAndCreateTask}/> : <CreateNewTaskButton setIsAdding={setIsAdding} /> }
+      {isAdding ? <CreateNewTaskForm tittle={tittle} setTittle={setTittle} setIsAdding={setIsAdding} goAndCreateTask={goAndCreateTask}/> : <CreateNewTaskButton setIsAdding={setIsAdding} /> }
     </>
   )
 }
