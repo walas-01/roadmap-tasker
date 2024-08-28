@@ -3,8 +3,7 @@ import { ContextBoard } from './pages/BoardPage/Context/BoardContext.jsx'
 
 
 // --- Pages
-import { BoardPage } from './pages/BoardPage/BoardPage.jsx'
-
+import BoardPage from './pages/BoardPage/BoardPage.jsx'
 
 function App(){
 

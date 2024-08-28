@@ -1,7 +1,7 @@
-import { useContext, useEffect, useState} from 'react'
+import { useContext, useEffect} from 'react'
 import React from 'react'
 import GroupCard from '../../components/GroupCard/GroupCard.jsx'
-import { ContextBoard,GlobalContext } from './Context/BoardContext.jsx'
+import { GlobalContext } from './Context/BoardContext.jsx'
 
 import './BoardPage_style.css'
 
@@ -25,7 +25,6 @@ const GROUP_DATA = [
     {task_id:'seven789',ownerGroup_id:'g7h8i9',tittle:'UseEffect',isDone:false},
   ]},
 ]
-
 
 function BoardPage(){ // --------------------------------------------------------------------------- [ BoardPage COMPONENT ]  
   const {groupList,setGroupList} = useContext(GlobalContext)
@@ -61,4 +60,4 @@ function BoardPage(){ // -------------------------------------------------------
 }
 
 
-export { BoardPage }
+export default BoardPage

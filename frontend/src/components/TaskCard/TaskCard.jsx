@@ -6,8 +6,8 @@ import { GlobalContext } from '../../pages/BoardPage/Context/BoardContext';
 import { ImCheckboxUnchecked,ImCheckboxChecked } from "react-icons/im";
 
 function TaskCard({taskObject}){
-  const {task_id,tittle,isDone} = taskObject
-  const {setActiveCard} = useContext(GlobalContext)
+  const {task_id,tittle,isDone,ownerGroup_id} = taskObject
+  const {setActiveCard,checkTask} = useContext(GlobalContext)
 
   // ---------- event handlers
   const handleDragStart = (e)=>{
@@ -18,14 +18,14 @@ function TaskCard({taskObject}){
   }
 
   const handleCheckButton = (e)=>{
-    // CALL checkTask()
+    checkTask(task_id,ownerGroup_id)
   }
 
   return(
     <li className={`taskCard ${isDone?"doneTask":""}`} draggable onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
       <div className='taskCard-icons'>
         <GoGrabber size={30}/>
-        <button onClick={()=>{console.log("checking in!")}}>
+        <button onClick={handleCheckButton}>
           {
             isDone ? <ImCheckboxChecked size={17}/> : <ImCheckboxUnchecked size={17}/>
           }

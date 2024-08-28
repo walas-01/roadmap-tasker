@@ -16,12 +16,10 @@ function DeleteArea(){
   }
 
   const handleDragLeave = (e)=>{
-    console.log("[delete]: leave!!")
     setActive(false)
   }
 
   const handleDrop = (e)=>{
-    console.log('[daleteArea]: i want to delete ', activeCard)
     removeTask()
     setActive(false)
   }
