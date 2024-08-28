@@ -27,6 +27,7 @@
 }
 
 .taskCard-icons button{
+  height: 16px;
   color: white;
   background:none;
   border: none;

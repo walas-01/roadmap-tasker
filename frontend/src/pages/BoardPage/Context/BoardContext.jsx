@@ -58,7 +58,7 @@ function ContextBoard({children}){
   const createNewTask = (tittle,ownerGroup_id)=>{ //---------------------- create new task in a group
 
     //1) construct taskObject AND generate task_id
-    const taskObject = {task_id:Date.now().toString(),tittle,isDone:false}
+    const taskObject = {task_id:Date.now().toString(),ownerGroup_id,tittle,isDone:false,}
 
     //2)get target Group
     const targetGroup = groupList.find(group => group.group_id === ownerGroup_id )
@@ -80,6 +80,7 @@ function ContextBoard({children}){
   }
 
   const checkTask = (task_id,ownerGroup_id)=>{ //---------------------- update task to be checked/unchecked
+    console.log("[checkTask]: SEARching for group Id: ",ownerGroup_id)
     //1)get owner group
     const ownerGroup = groupList.find(group => group.group_id === ownerGroup_id )
 

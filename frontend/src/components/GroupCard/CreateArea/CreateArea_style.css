@@ -1,7 +1,6 @@
 
 .createForm{
   margin-bottom: 0.8rem;
-  margin-left: 2rem;
 }
 .createForm-input{
   width: 95%;
@@ -37,7 +36,6 @@
 
 .createButton{
   margin-bottom: 0.8rem;
-  margin-left: 2rem;
 
   color: rgba(255, 255, 255, 0.719);
 
