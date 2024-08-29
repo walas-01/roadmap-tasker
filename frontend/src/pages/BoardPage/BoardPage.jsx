@@ -21,7 +21,7 @@ const GROUP_DATA = [
     {task_id:'five567',ownerGroup_id:'d4e5f6',tittle:'Props and Prop types',isDone:true,isStared:true},
   ]},
   {group_id:'g7h8i9',tittle:'React Hooks Basics',tasks:[
-    {task_id:'six678',ownerGroup_id:'g7h8i9',tittle:'UseStatemmmmmmmmmmmmmmmmmm mmmmmmmmmm mmmmmmmmmmm m m mmmmmmm m',isDone:false,isStared:true},
+    {task_id:'six678',ownerGroup_id:'g7h8i9',tittle:'UseState',isDone:false,isStared:true},
     {task_id:'seven789',ownerGroup_id:'g7h8i9',tittle:'UseEffect',isDone:false,isStared:false},
   ]},
 ]

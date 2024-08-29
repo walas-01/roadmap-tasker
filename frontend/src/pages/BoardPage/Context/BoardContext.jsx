@@ -11,7 +11,7 @@ function ContextBoard({children}){
   // * -----------------
 
   useEffect(()=>{
-    console.log("----- [GROUPLIST]: Updated")
+    console.log("[GroupList]: Updated!")
     findStaredTasks()
   },[groupList])
 
@@ -87,7 +87,6 @@ function ContextBoard({children}){
   }
 
   const checkTask = (task_id,ownerGroup_id)=>{ //---------------------- [CHECK] update task to be checked/unchecked
-    console.log("[checkTask]: SEARching for group Id: ",ownerGroup_id)
     //1)get owner group
     const ownerGroup = groupList.find(group => group.group_id === ownerGroup_id )
 
@@ -113,10 +112,62 @@ function ContextBoard({children}){
     //todo: UPDATE Group TO DATA BASE
   }
 
-  const findStaredTasks = ()=>{
-    console.log("[findStaredTasks]: executed! ")
+  const findStaredTasks = ()=>{ //---------------------------------------- [FIND] find the stared tasks to render
+
     const staredTasks = groupList.flatMap(group => group.tasks).filter(task => task.isStared)
     setTodoTasks(staredTasks)
+  }
+
+  const starTask = (task_id,ownerGroup_id)=>{ //------------------------------------------------- [STAR] switch the isStared property of a task
+    //1)get owner group
+    const ownerGroup = groupList.find(group => group.group_id === ownerGroup_id )
+
+    //2) find the task and switch its isDone property
+    ownerGroup.tasks = ownerGroup.tasks.map((task)=>{
+      if(task.task_id == task_id){
+        return( {...task,isStared:!task.isStared} )
+      }else{
+        return task
+      }
+    })
+
+    //3) update state
+    let updatedGroupList = groupList.map( group => {
+      if( group.group_id === ownerGroup.group_id ){
+       return ownerGroup 
+      }else{
+       return group
+      }
+    })
+
+    setGroupList(updatedGroupList)
+    //todo: UPDATE Group TO DATA BASE
+  }
+
+  const starActiveTask = ()=>{ //------------------------------------------------- [STAR] star/unstar the active task
+    //1)get owner group
+    const ownerGroup = groupList.find(group => group.group_id === activeCard.ownerGroup_id )
+
+    //2) find the task and switch its isDone property
+    ownerGroup.tasks = ownerGroup.tasks.map((task)=>{
+      if(task.task_id == activeCard.task_id){
+        return( {...task,isStared:!task.isStared} )
+      }else{
+        return task
+      }
+    })
+
+    //3) update state
+    let updatedGroupList = groupList.map( group => {
+      if( group.group_id === ownerGroup.group_id ){
+       return ownerGroup 
+      }else{
+       return group
+      }
+    })
+
+    setGroupList(updatedGroupList)
+    //todo: UPDATE Group TO DATA BASE
   }
 
   return (
@@ -128,7 +179,9 @@ function ContextBoard({children}){
                 removeTask,
                 createNewTask,
                 checkTask,
-                findStaredTasks
+                findStaredTasks,
+                starTask,
+                starActiveTask
              }}>
       {children}
     </GlobalContext.Provider>

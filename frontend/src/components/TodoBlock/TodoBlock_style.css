@@ -59,6 +59,10 @@
 }
 
 
+.staredTaskCard-doneTask{
+  text-decoration: line-through;
+}
+
 .staredTaskCard-text{
   width: 80%;
 }
@@ -81,4 +85,40 @@
 
 .removeButton:hover{
   background-color: white;
+}
+
+
+/*------------------------------------- staredTaskCard */
+
+.todoBlock-dropArea{
+  color: var(--backcolor-black);
+  height: 3rem;
+  width: 90%;
+  margin-bottom: 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: bold;
+  border-radius: 5px;
+  background: repeating-linear-gradient(
+      -55deg,
+      var(--color-green1),
+      black 5px,
+      var(--color-green1) 5px,
+      black 10px
+      );
+}
+
+
+.todoBlock-dropArea-active{
+  background: none;
+  background-color:var(--color-green1);
+  scale: 1.01;
+}
+
+.todoBlock-dropArea-text{
+  padding: 3px 5px;
+  background-color: var(--color-green1);
 }
