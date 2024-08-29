@@ -7,6 +7,7 @@ function ContextBoard({children}){
   const [groupList,setGroupList] = useState([])
   const [activeCard,setActiveCard] = useState(null)
 
+  const [todoTasks,setTodoTasks] = useState([])
 
   const removeTask = ()=>{ //-------------------------------------------- removing a task from its group
     //1)get original Group
@@ -84,7 +85,6 @@ function ContextBoard({children}){
     //1)get owner group
     const ownerGroup = groupList.find(group => group.group_id === ownerGroup_id )
 
-
     //2) find the task and switch its isDone property
     ownerGroup.tasks = ownerGroup.tasks.map((task)=>{
       if(task.task_id == task_id){
@@ -107,15 +107,22 @@ function ContextBoard({children}){
     //todo: UPDATE Group TO DATA BASE
   }
 
+  const findStaredTasks = ()=>{
+    //2) search in each group and in each task list for stared tasks
+    const staredTasks = groupList.flatMap(group => group.tasks).filter(task => task.isStared)
+    setTodoTasks(staredTasks)
+  }
 
   return (
     <GlobalContext.Provider 
       value={{ groupList,setGroupList,
                 activeCard,setActiveCard,
+                todoTasks,setTodoTasks,
                 moveTask,
                 removeTask,
                 createNewTask,
-                checkTask
+                checkTask,
+                findStaredTasks
              }}>
       {children}
     </GlobalContext.Provider>

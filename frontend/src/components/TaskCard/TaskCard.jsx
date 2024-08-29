@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react'
-import { GoGrabber } from "react-icons/go"
 import './TaskCard_style.css'
 import { GlobalContext } from '../../pages/BoardPage/Context/BoardContext'; 
 
+import { GoGrabber } from "react-icons/go"
 import { ImCheckboxUnchecked,ImCheckboxChecked } from "react-icons/im";
 
 function TaskCard({taskObject}){
