@@ -5,19 +5,13 @@ import { CreateTask } from './CreateArea/CreateArea.jsx'
 // react icons
 import { MdRadioButtonUnchecked,MdRadioButtonChecked } from "react-icons/md";
 import { RiArrowDownSFill,RiArrowUpSFill } from "react-icons/ri";
-import { RiArrowUpWideLine, RiArrowDownWideLine} from "react-icons/ri";
-
-
 
 // import components
 import TaskCard from '../TaskCard/TaskCard.jsx'
 import DropArea from '../DropArea/DropArea.jsx'
 
-
-
-
 function GroupCard({groupObject}){ // ----------------------------- [ GroupComponent ] -
-  const [active,setActive] = useState(false)
+
   const [isCompleted,setIsCompleted] = useState(false)
   const [isOpen,setIsOpen] = useState(true)
 
@@ -34,7 +28,7 @@ function GroupCard({groupObject}){ // ----------------------------- [ GroupCompo
   //* const groupTasks = taskList.filter((t)=> t.groupId == id)
 
   return( // ------------------------------------- return
-    <div className={`groupCard ${active? 'activeGroup':''} `}>
+    <div className={`groupCard`}>
 
       <h3 className="groupCard-head">
 

@@ -1,4 +1,4 @@
-import { createContext, useState } from "react"
+import { createContext, useState,useEffect } from "react"
 
 const GlobalContext = createContext()
 
@@ -8,8 +8,14 @@ function ContextBoard({children}){
   const [activeCard,setActiveCard] = useState(null)
 
   const [todoTasks,setTodoTasks] = useState([])
+  // * -----------------
 
-  const removeTask = ()=>{ //-------------------------------------------- removing a task from its group
+  useEffect(()=>{
+    console.log("----- [GROUPLIST]: Updated")
+    findStaredTasks()
+  },[groupList])
+
+  const removeTask = ()=>{ //-------------------------------------------- [REMOVE] removing a task from its group
     //1)get original Group
     const originalGroup =  groupList.find(group => group.group_id === activeCard.ownerGroup_id)
   
@@ -23,15 +29,15 @@ function ContextBoard({children}){
        return group
       }
     })
-  
+    
+    
+    setGroupList(updatedGroupList)
     //todo: UPDATE Group TO DATA BASE
-    return updatedGroupList
   }
 
-  const moveTask = (groupTargetId,position)=>{ //-------------------------- moving tasks to other groups
+  const moveTask = (groupTargetId,position)=>{ //-------------------------- [MOVE] moving tasks to other groups
     // 1) remove task from group AND update state
     let updatedGroupList = removeTask()
-    setGroupList(updatedGroupList)
 
     //2)get target Group
     const targetGroup = groupList.find(group => group.group_id === groupTargetId )
@@ -56,7 +62,7 @@ function ContextBoard({children}){
     //todo: UPDATE Group TO DATA BASE
   }
 
-  const createNewTask = (tittle,ownerGroup_id)=>{ //---------------------- create new task in a group
+  const createNewTask = (tittle,ownerGroup_id)=>{ //---------------------- [CREATE] create new task in a group
 
     //1) construct taskObject AND generate task_id
     const taskObject = {task_id:Date.now().toString(),ownerGroup_id,tittle,isDone:false,}
@@ -80,7 +86,7 @@ function ContextBoard({children}){
     //todo: UPDATE Group TO DATA BASE
   }
 
-  const checkTask = (task_id,ownerGroup_id)=>{ //---------------------- update task to be checked/unchecked
+  const checkTask = (task_id,ownerGroup_id)=>{ //---------------------- [CHECK] update task to be checked/unchecked
     console.log("[checkTask]: SEARching for group Id: ",ownerGroup_id)
     //1)get owner group
     const ownerGroup = groupList.find(group => group.group_id === ownerGroup_id )
@@ -108,7 +114,7 @@ function ContextBoard({children}){
   }
 
   const findStaredTasks = ()=>{
-    //2) search in each group and in each task list for stared tasks
+    console.log("[findStaredTasks]: executed! ")
     const staredTasks = groupList.flatMap(group => group.tasks).filter(task => task.isStared)
     setTodoTasks(staredTasks)
   }

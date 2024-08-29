@@ -13,6 +13,11 @@
   cursor: grab;
 }
 
+.taskCard:hover{
+  transition: 0.08s;
+  scale: 1.01;
+}
+
 .taskCard:active{
   border: solid 2px var(--color1);
   background-color: #2a2135;

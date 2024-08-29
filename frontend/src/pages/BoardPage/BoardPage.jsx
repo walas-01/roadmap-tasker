@@ -29,16 +29,10 @@ const GROUP_DATA = [
 function BoardPage(){ // --------------------------------------------------------------------------- [ BoardPage COMPONENT ]  
   const {groupList,setGroupList,findStaredTasks} = useContext(GlobalContext)
 
-  
   useEffect(()=>{ // ------------------- useEffect
     ////todo: THIS IS THE PART WHERE WE FETCH DATA (with axios) FROM DATABASE AND SET THE STATES
     setGroupList(GROUP_DATA)
-
-    findStaredTasks()
-
-    //console.log("[ GroupList ] --------------------")
-    //console.log(groupList)
-  },[groupList])
+  },[])
 
 
   return ( ///--------------------------- (return)
