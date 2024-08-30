@@ -1,9 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
-
 :root{
   --color1:#5D51E2;
   --color-green1:#32AD6F;
+  --color-green2:#162222;
+  --color-red1:#E23838;
+  --color-red2:#221622;
   --backcolor-black:#120b1d;
 }
 
@@ -16,7 +18,6 @@
   font-family: "Work Sans", sans-serif;
   font-style: normal;
 }
-
 
 html, body {
   max-width: 100%;

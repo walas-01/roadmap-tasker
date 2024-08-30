@@ -9,7 +9,8 @@
   align-items: center;
   justify-content: center;
 
-  border: solid 5px #E23838;
+  border-top: solid 10px var(--color-red1);
+  border-bottom: solid 10px var(--color-red1);
   border-radius: 8px;
 }
 
@@ -19,14 +20,14 @@
 
   font-size: x-large;
   color: var(--backcolor-black);
-  background-color:#E23838;
+  background-color:var(--color-red1);
 }
 
 
 .active{
-  background-color: #E23838;
+  background-color: var(--color-red1);
 }
 
 .inactive{
-  background-color: #221622;
+  background-color: var(--color-red2);
 }

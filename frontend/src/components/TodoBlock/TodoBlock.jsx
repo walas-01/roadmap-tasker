@@ -4,8 +4,7 @@ import { GlobalContext } from '../../pages/BoardPage/Context/BoardContext.jsx'
 
 import { ImCheckboxUnchecked,ImCheckboxChecked } from "react-icons/im"
 import { ImCross } from "react-icons/im"
-import { MdAddToPhotos } from "react-icons/md";
-
+import { MdAddToPhotos } from "react-icons/md"
 
 const StaredTaskCard = ({taskObject})=>{ // -------------------------------------------- [ StaredTaskCard ]
   const {checkTask,starTask} = useContext(GlobalContext)

@@ -1,13 +1,4 @@
 .taskCard{
-  padding: 4px;
-
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-
-  word-break: break-all;
-
-  background-color: #353063;
   border: solid 2px #353063;
   border-radius: 5px;
   cursor: grab;
@@ -22,6 +13,31 @@
   border: solid 2px var(--color1);
   background-color: #2a2135;
 }
+
+.doneTask{
+  background-color: #231D3A;
+  border: solid 2px #231D3A;
+  color: #b1b1b1;
+}
+
+.doneTask .taskCard-head{
+  background-color: #231D3A;
+  border: solid 2px #231D3A;
+  color: #b1b1b1;
+  text-decoration: line-through;
+}
+
+/*----------------------------------------------- [head] */
+.taskCard-head{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+
+  word-break: break-all;
+  background-color: #353063;
+}
+
 
 .taskCard-icons{
 
@@ -39,9 +55,25 @@
   cursor: pointer;
 }
 
-.doneTask{
-  background-color: #231D3A;
-  border: solid 2px #231D3A;
-  color: #b1b1b1;
-  text-decoration: line-through;
+.taskCard-tittle{
+  width: 100%;
+}
+
+.taskCard-openButton{
+
+  color: white;
+  background:none;
+  border: none;
+  cursor: pointer;
+}
+
+/*----------------------------------------------- [body] */
+
+.taskCard-body{
+  padding: 10px;
+
+
+  font-size: 0.9rem;
+  font-weight: 300;
+  background-color: #151328;
 }

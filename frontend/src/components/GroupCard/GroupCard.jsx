@@ -3,8 +3,9 @@ import './GroupCard_style.css'
 import { CreateTask } from './CreateArea/CreateArea.jsx'
 
 // react icons
-import { MdRadioButtonUnchecked,MdRadioButtonChecked } from "react-icons/md";
-import { RiArrowDownSFill,RiArrowUpSFill } from "react-icons/ri";
+import { MdRadioButtonUnchecked,MdRadioButtonChecked } from "react-icons/md"
+import { IoIosArrowDropup,IoIosArrowDropdownCircle } from "react-icons/io"
+
 
 // import components
 import TaskCard from '../TaskCard/TaskCard.jsx'
@@ -38,7 +39,7 @@ function GroupCard({groupObject}){ // ----------------------------- [ GroupCompo
         </div>
 
         <button className='groupCard-head-button' onClick={()=>{setIsOpen(!isOpen)}}>
-          {isOpen? <RiArrowDownSFill size={30}/> : <RiArrowUpSFill size={30}/> }
+          {isOpen? <IoIosArrowDropdownCircle size={30}/> : <IoIosArrowDropup size={30}/> }
         </button>
       </h3>
 
