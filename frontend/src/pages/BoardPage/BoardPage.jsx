@@ -15,16 +15,16 @@ const des = 'lorem Ipsum has been the industrys standard dummy text ever since t
 const GROUP_DATA = [
   {group_id:'a1b2c3',tittle:'Introduction to React',tasks:[
     {task_id:'one123',ownerGroup_id:'a1b2c3',tittle:'Origins Of React',description:des,isDone:true,isStared:false},
-    {task_id:'two234',ownerGroup_id:'a1b2c3',tittle:'Why React?',description:des,isDone:true,isStared:false},
+    {task_id:'two234',ownerGroup_id:'a1b2c3',tittle:'Why React?',description:'',isDone:true,isStared:false},
     {task_id:'three345',ownerGroup_id:'a1b2c3',tittle:'DOM and Virtual DOM',description:des,isDone:true,isStared:false},
   ]},
   {group_id:'d4e5f6',tittle:'React Basics 101',tasks:[
     {task_id:'four456',ownerGroup_id:'d4e5f6',tittle:'Basics of Components,',description:des,isDone:false,isStared:true},
-    {task_id:'five567',ownerGroup_id:'d4e5f6',tittle:'Props and Prop types',description:des,isDone:true,isStared:true},
-    {task_id:'five567',ownerGroup_id:'d4e5f6',tittle:'Component comunication',description:des,isDone:true,isStared:false},
+    {task_id:'five567',ownerGroup_id:'d4e5f6',tittle:'Props and Prop types',description:'',isDone:true,isStared:true},
+    {task_id:'eight8910',ownerGroup_id:'d4e5f6',tittle:'Component comunication',description:des,isDone:false,isStared:false},
   ]},
   {group_id:'g7h8i9',tittle:'React Hooks Basics',tasks:[
-    {task_id:'six678',ownerGroup_id:'g7h8i9',tittle:'React Hooks and how to use them',description:des,isDone:false,isStared:true},
+    {task_id:'six678',ownerGroup_id:'g7h8i9',tittle:'React Hooks and how to use them',description:'',isDone:false,isStared:true},
     {task_id:'seven789',ownerGroup_id:'g7h8i9',tittle:'UseState: state and setState',description:des,isDone:false,isStared:false},
   ]},
 ]

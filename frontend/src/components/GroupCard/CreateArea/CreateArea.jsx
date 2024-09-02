@@ -4,6 +4,7 @@ import './CreateArea_style.css'
 import { GlobalContext } from '../../../pages/BoardPage/Context/BoardContext'
 
 function CreateNewTaskForm({tittle,setTittle,setIsAdding,goAndCreateTask}){ //--------------------------------------------- [ CreateArea ] -
+  
   const handleSubmit = (e)=>{
     e.preventDefault()
 
@@ -35,7 +36,8 @@ function CreateNewTaskButton({setIsAdding}){ //-------------------- [ CreateNewT
   )
 }
 
-function CreateTask({group_id}){
+
+function CreateTask({group_id}){ //------------------------------------------------- [ CreateTask ] -
   const [tittle,setTittle] = useState("")
   const [isAdding,setIsAdding] = useState(false)
 

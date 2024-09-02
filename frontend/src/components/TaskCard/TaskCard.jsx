@@ -14,6 +14,7 @@ function TaskCard({taskObject}){
 
   // ---------- event handlers
   const handleDragStart = (e)=>{
+    setIsOpen(false)
     setActiveCard(taskObject)
   }
   const handleDragEnd = (e)=>{
@@ -41,12 +42,14 @@ function TaskCard({taskObject}){
           </button>
         </div>
 
-        <p className='taskCard-tittle'>{tittle}</p>
+        <p className='taskCard-tittle'>{tittle}</p> 
 
-        <button className='taskCard-openButton' onClick={handleOpen}> {isOpen? <RiArrowUpSFill size={30}/> : <RiArrowDownSFill size={30}/>}  </button>
+        {!taskObject.description || taskObject.description == '' ? 
+          '' : <button className='taskCard-openButton' onClick={handleOpen}> {isOpen? <RiArrowUpSFill size={30}/> : <RiArrowDownSFill size={30}/>}  </button>
+        }
       </div>
 
-      { isOpen?  
+      { isOpen && taskObject.description && taskObject.description !== '' ?  
       <div className='taskCard-body'>
         <p> {taskObject.description} </p>
       </div>
