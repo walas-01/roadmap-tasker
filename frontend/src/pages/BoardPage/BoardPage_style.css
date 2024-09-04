@@ -2,10 +2,8 @@
   width: 90%;
   margin: 10px auto;
 
-  
   display: flex;
   justify-content: end;
-  gap: 1rem;
 }
 
 .board{
@@ -17,4 +15,11 @@
 
 .sideBar{
   width: 25%;
+}
+
+.innerSideBar{
+  width: 15%;
+  position: fixed;
+  top: 0;
+  left: 5%;
 }

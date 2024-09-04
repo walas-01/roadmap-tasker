@@ -41,8 +41,10 @@ function BoardPage(){ // -------------------------------------------------------
   return ( ///--------------------------- (return)
     <main className="boardPage">
       <section className="sideBar">
-        <Todo />
-        <DeleteArea />
+        <div className='innerSideBar'>
+          <Todo />
+          <DeleteArea />
+        </div>
       </section>
 
       <section className="board">

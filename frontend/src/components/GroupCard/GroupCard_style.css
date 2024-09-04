@@ -4,8 +4,6 @@
   border-top-right-radius: 8px;
 }
 
-
-
 /*--------------------------------------------------------- head */
 .groupCard-head {
   padding: 6px 15px;
@@ -39,6 +37,7 @@
 
 /*------------------------------------------------------------ task list/section */
 .groupCard-tasksSection{
+  width: 95%;
   margin-left: 2rem;
   opacity: 0;
   transform: translateY(-20px);
@@ -53,7 +52,6 @@
 }
 
 .groupCard-taskList {
-  width: 95%;
   display: flex;
   flex-direction: column;
 }
