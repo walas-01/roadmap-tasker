@@ -1,9 +1,12 @@
 
 .createForm{
   margin-bottom: 0.8rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 .createForm-input{
-  width: 95%;
   padding: 0.8rem;
 
   resize: vertical;

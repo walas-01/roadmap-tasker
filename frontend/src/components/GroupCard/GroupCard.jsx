@@ -68,7 +68,6 @@ function GroupCard({groupObject}){ // ------------------------------------------
     setIsEditing(true)
   }
 
-
   return( // ------------------------------------- return
     <div className='groupCard'>
 

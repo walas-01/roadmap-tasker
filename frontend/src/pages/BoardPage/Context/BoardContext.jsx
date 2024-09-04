@@ -63,10 +63,10 @@ function ContextBoard({children}){
     //todo: UPDATE Group TO DATA BASE
   }
 
-  const createNewTask = (tittle,ownerGroup_id)=>{ //---------------------- [CREATE] create new task in a group
+  const createNewTask = (tittle,description,ownerGroup_id)=>{ //---------------------- [CREATE] create new task in a group
 
     //1) construct taskObject AND generate task_id
-    const taskObject = {task_id:Date.now().toString(),ownerGroup_id,tittle,isDone:false,}
+    const taskObject = {task_id:Date.now().toString(),ownerGroup_id,tittle,description,isDone:false,}
 
     //2)get target Group
     const targetGroup = groupList.find(group => group.group_id === ownerGroup_id )

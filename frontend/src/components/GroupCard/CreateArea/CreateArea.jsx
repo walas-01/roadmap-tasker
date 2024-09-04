@@ -3,7 +3,7 @@ import './CreateArea_style.css'
 
 import { GlobalContext } from '../../../pages/BoardPage/Context/BoardContext'
 
-function CreateNewTaskForm({tittle,setTittle,setIsAdding,goAndCreateTask}){ //--------------------------------------------- [ CreateArea ] -
+function CreateNewTaskForm({tittle,setTittle,description,setDescription,setIsAdding,goAndCreateTask}){ //--------------------------------------------- [ CreateArea ] -
   
   const handleSubmit = (e)=>{
     e.preventDefault()
@@ -13,13 +13,22 @@ function CreateNewTaskForm({tittle,setTittle,setIsAdding,goAndCreateTask}){ //--
       alert("Task's Tittle can not have more than a 100 characters!")
       return
     }
+
+    if(description.length > 1200){
+      alert("Task's Description can not have more than a 1200 characters!")
+      return
+    }
+
     goAndCreateTask()
+    setTittle('')
+    setDescription('')
     setIsAdding(false)
   }
 
   return(
     <form className='createForm' onSubmit={handleSubmit}>
-      <textarea autoFocus className='createForm-input' placeholder='new task' onChange={(e)=>{setTittle(e.target.value)}}/>
+      <input type="text" autoFocus className='createForm-input' placeholder='Task tiittle' onChange={(e)=>{setTittle(e.target.value)}}/>
+      <textarea className='createForm-input' placeholder='Task description (optional)' onChange={(e)=>{setDescription(e.target.value)}}/>
       <div className='createForm-buttons'>
         <button type='submit' className='createForm-buttons-add'>Add +</button>
         <button className='createForm-buttons-cancel' onClick={()=>{setIsAdding(false)}}>Cancel</button>
@@ -36,20 +45,23 @@ function CreateNewTaskButton({setIsAdding}){ //-------------------- [ CreateNewT
   )
 }
 
-
 function CreateTask({group_id}){ //------------------------------------------------- [ CreateTask ] -
-  const [tittle,setTittle] = useState("")
+  const [tittle,setTittle] = useState('')
+  const [description,setDescription] = useState('')
   const [isAdding,setIsAdding] = useState(false)
 
   const {createNewTask} = useContext(GlobalContext)
 
   const goAndCreateTask = ()=>{
-    createNewTask(tittle,group_id)
+    createNewTask(tittle,description,group_id)
   }
 
   return(
     <>
-      {isAdding ? <CreateNewTaskForm tittle={tittle} setTittle={setTittle} setIsAdding={setIsAdding} goAndCreateTask={goAndCreateTask}/> : <CreateNewTaskButton setIsAdding={setIsAdding} /> }
+      {isAdding ? <CreateNewTaskForm tittle={tittle} setTittle={setTittle} description={description}
+      setDescription={setDescription} setIsAdding={setIsAdding} goAndCreateTask={goAndCreateTask}/> :
+
+      <CreateNewTaskButton setIsAdding={setIsAdding} /> }
     </>
   )
 }
