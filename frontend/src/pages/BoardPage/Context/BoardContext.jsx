@@ -12,6 +12,7 @@ function ContextBoard({children}){
 
   useEffect(()=>{
     console.log("[GroupList]: Updated!")
+    console.log(groupList)
     findStaredTasks()
   },[groupList])
 
@@ -145,7 +146,7 @@ function ContextBoard({children}){
   }
 
   const starActiveTask = ()=>{ //------------------------------------------------- [STAR] star/unstar the active task
-    //1)get owner group
+    //1)get owner group of activeCard
     const ownerGroup = groupList.find(group => group.group_id === activeCard.ownerGroup_id )
 
     //2) find the task and switch its isDone property
@@ -166,7 +167,28 @@ function ContextBoard({children}){
       }
     })
 
-    setGroupList(updatedGroupList)
+    setGroupList(updatedGroupList) 
+    //todo: UPDATE Group TO DATA BASE
+  }
+
+
+  const editGroup = (group_id,newTittle)=>{ //------------------------------------------------- [UPDATE] change group's name
+    //1) find group object and update it
+    const updatedGroup = groupList.find(group => group.group_id === group_id )
+
+    //2) update group
+    updatedGroup.tittle = newTittle
+
+    //3) update group list
+    let updatedGroupList = groupList.map( group => {
+      if( group.group_id === group_id ){
+       return updatedGroup 
+      }else{
+       return group
+      }
+    })
+
+    setGroupList(updatedGroupList) 
     //todo: UPDATE Group TO DATA BASE
   }
 
@@ -181,7 +203,8 @@ function ContextBoard({children}){
                 checkTask,
                 findStaredTasks,
                 starTask,
-                starActiveTask
+                starActiveTask,
+                editGroup
              }}>
       {children}
     </GlobalContext.Provider>
