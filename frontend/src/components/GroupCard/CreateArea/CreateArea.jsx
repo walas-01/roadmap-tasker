@@ -1,10 +1,30 @@
-import { useState,useContext } from 'react'
+import { useState,useContext,useEffect,useRef } from 'react'
 import './CreateArea_style.css'
 
 import { GlobalContext } from '../../../pages/BoardPage/Context/BoardContext'
 
 function CreateNewTaskForm({tittle,setTittle,description,setDescription,setIsAdding,goAndCreateTask}){ //--------------------------------------------- [ CreateArea ] -
   
+
+  const formRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (formRef.current && !formRef.current.contains(event.target)) {
+        setIsAdding(false); 
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+
+
+
   const handleSubmit = (e)=>{
     e.preventDefault()
 
@@ -26,9 +46,10 @@ function CreateNewTaskForm({tittle,setTittle,description,setDescription,setIsAdd
   }
 
   return(
-    <form className='createForm' onSubmit={handleSubmit}>
-      <input type="text" autoFocus className='createForm-input' placeholder='Task tiittle' onChange={(e)=>{setTittle(e.target.value)}}/>
+    <form ref={formRef} className='createForm' onSubmit={handleSubmit}>
+      <input type="text" autoFocus className='createForm-input' placeholder='Task tittle' onChange={(e)=>{setTittle(e.target.value)}}/>
       <textarea className='createForm-input' placeholder='Task description (optional)' onChange={(e)=>{setDescription(e.target.value)}}/>
+
       <div className='createForm-buttons'>
         <button type='submit' className='createForm-buttons-add'>Add +</button>
         <button className='createForm-buttons-cancel' onClick={()=>{setIsAdding(false)}}>Cancel</button>

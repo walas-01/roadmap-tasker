@@ -59,7 +59,8 @@
   width: 100%;
 }
 
-.taskCard-openButton{
+.taskCard-button{
+  height: 100%;
   color: white;
   background:none;
   border: none;
@@ -75,4 +76,47 @@
   font-size: 0.9rem;
   font-weight: 300;
   background-color: #151328;
+}
+
+
+/*----------------------------------------------- [edit form] */
+
+.taskCard-editForm{
+  margin-bottom: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.taskCard-editForm-input{
+  padding: 0.8rem;
+
+  resize: vertical;
+  border: solid 3px var(--color-blue1);
+  border-radius: 5px;
+  background-color: #131230;
+  color: white;
+  outline: none;
+}
+
+.taskCard-editForm-buttons{
+  margin-top: 0.4rem;
+  display: flex;
+}
+.taskCard-editForm-doneButton{
+  padding: 5px 15px;
+  font-weight: bold;
+  border: none;
+  border-radius: 10rem;
+  background-color: var(--color-blue1);
+  color: white;
+  cursor: pointer;
+}
+.taskCard-editForm-cancelButton{
+  padding: 5px 15px;
+
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
 }

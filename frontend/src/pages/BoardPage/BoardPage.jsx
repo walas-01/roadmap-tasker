@@ -19,7 +19,8 @@ const GROUP_DATA = [
     {task_id:'three345',ownerGroup_id:'a1b2c3',tittle:'DOM and Virtual DOM',description:des,isDone:true,isStared:false},
   ]},
   {group_id:'d4e5f6',tittle:'React Basics 101',tasks:[
-    {task_id:'four456',ownerGroup_id:'d4e5f6',tittle:'Basics of Components,',description:des,isDone:false,isStared:true},
+    {task_id:'four456',ownerGroup_id:'d4e5f6',tittle:'Basics of Components',description:des,isDone:true,isStared:true},
+    {task_id:'nine91011',ownerGroup_id:'d4e5f6',tittle:'Class vs Function Components',description:des,isDone:false,isStared:false},
     {task_id:'five567',ownerGroup_id:'d4e5f6',tittle:'Props and Prop types',description:'',isDone:true,isStared:true},
     {task_id:'eight8910',ownerGroup_id:'d4e5f6',tittle:'Component comunication',description:des,isDone:false,isStared:false},
   ]},

@@ -173,7 +173,7 @@ function ContextBoard({children}){
 
 
   const editGroup = (group_id,newTittle)=>{ //------------------------------------------------- [UPDATE] change group's name
-    //1) find group object and update it
+    //1) find group object
     const updatedGroup = groupList.find(group => group.group_id === group_id )
 
     //2) update group
@@ -192,6 +192,34 @@ function ContextBoard({children}){
     //todo: UPDATE Group TO DATA BASE
   }
 
+  const editTask = (task_id,ownerGroup_id,newTittle,newDescription) =>{  //------------------------------------ [UPDATE] edit a task tittle and/or description
+    //1)find the ownerGroup
+    const ownerGroup = groupList.find(group => group.group_id === ownerGroup_id )
+
+    //2)find the task and edit it
+    ownerGroup.tasks = ownerGroup.tasks.map((task)=>{
+      if(task.task_id == task_id){
+        return( {...task,tittle:newTittle,description:newDescription} )
+      }else{
+        return task
+      }
+    })
+
+    //3)update group list
+    let updatedGroupList = groupList.map( group => {
+      if( group.group_id === ownerGroup_id ){
+       return ownerGroup 
+      }else{
+       return group
+      }
+    })
+
+    //4)set state and upload to DB
+    setGroupList(updatedGroupList)
+    //todo: UPDATE Group TO DATA BASE
+  }
+
+
   return (
     <GlobalContext.Provider 
       value={{ groupList,setGroupList,
@@ -202,9 +230,8 @@ function ContextBoard({children}){
                 createNewTask,
                 checkTask,
                 findStaredTasks,
-                starTask,
-                starActiveTask,
-                editGroup
+                starTask,starActiveTask,
+                editGroup,editTask
              }}>
       {children}
     </GlobalContext.Provider>

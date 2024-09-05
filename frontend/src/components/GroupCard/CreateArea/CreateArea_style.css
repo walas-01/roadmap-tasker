@@ -1,7 +1,6 @@
 
 .createForm{
   margin-bottom: 0.8rem;
-
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -12,7 +11,7 @@
   resize: vertical;
   border: solid 3px var(--color1);
   border-radius: 5px;
-  background-color: #29173f;
+  background-color: #1f1230;
   color: white;
   outline: none;
 }
@@ -21,6 +20,7 @@
   display: flex;
 }
 .createForm-buttons-add{
+  border: none;
   padding: 5px 15px;
   font-weight: bold;
   border-radius: 10rem;
@@ -28,7 +28,7 @@
 }
 .createForm-buttons-cancel{
   padding: 5px 15px;
-  font-weight: bold;
+
   background: none;
   border: none;
   color: white;
@@ -40,7 +40,7 @@
 .createButton{
   margin-bottom: 0.8rem;
 
-  color: rgba(255, 255, 255, 0.719);
+  color: #ffffffb7;
 
   background:none;
   border: none;
