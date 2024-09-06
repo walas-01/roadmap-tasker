@@ -6,6 +6,7 @@
 
 /*--------------------------------------------------------- head */
 .groupCard-head {
+  width: 95%;
   padding: 6px 15px;
   margin-bottom: 2px;
 
@@ -27,17 +28,34 @@
   color: var(--backcolor-black);
 }
 
-.groupCard-head-button{
+.groupCard-head-openButton{
   height: 30px;
   background: none;
   border: none;
   cursor: pointer;
 }
 
+.groupCard-headContainer{
+  display: flex;
+  justify-content: space-between;
+}
+
+.groupCard-head-deleteButton{
+  color: var(--color1);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.groupCard-head-deleteButton:hover{
+  color: white;
+  transition: 0.2s;
+  scale: 1.1;
+}
 
 /*------------------------------------------------------------ task list/section */
 .groupCard-tasksSection{
-  width: 95%;
+  width: 92%;
   margin-left: 2rem;
   opacity: 0;
   transform: translateY(-20px);
@@ -69,7 +87,7 @@
 .groupCard-editingInput{
   width: 30rem;
   padding: 5px 10px;
-  background-color:var(--color1);
+  background-color:var(--backcolor-black);
   font-size: medium;
   color: white;
   border: none;

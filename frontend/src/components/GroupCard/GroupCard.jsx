@@ -6,10 +6,12 @@ import { GlobalContext } from '../../pages/BoardPage/Context/BoardContext.jsx'
 // react icons
 import { MdRadioButtonUnchecked,MdRadioButtonChecked } from "react-icons/md"
 import { IoIosArrowDropup,IoIosArrowDropdownCircle } from "react-icons/io"
+import { FaTrashCan } from "react-icons/fa6"
 
 // import components
 import TaskCard from '../TaskCard/TaskCard.jsx'
 import DropArea from '../DropArea/DropArea.jsx'
+import Popup from '../Popup/Popup.jsx'
 
 
 const EditingInput = ({groupId,tittle,setTittle,setIsEditing})=>{  // ---------------------------- [ input ] -
@@ -50,9 +52,12 @@ const EditingInput = ({groupId,tittle,setTittle,setIsEditing})=>{  // ----------
 function GroupCard({groupObject}){ // --------------------------------------------- [ GroupComponent ] -
   const [tittle,setTittle] = useState(groupObject.tittle)
 
+  const {deleteGroup} = useContext(GlobalContext)
+
   const [isEditing,setIsEditing] = useState(false)
   const [isCompleted,setIsCompleted] = useState(false)
   const [isOpen,setIsOpen] = useState(true)
+  const [isDeleting,setIsDeleting] = useState(false)
 
   useEffect(()=>{
     if(groupObject.tasks.every((task)=> task.isDone == true)){
@@ -68,44 +73,71 @@ function GroupCard({groupObject}){ // ------------------------------------------
     setIsEditing(true)
   }
 
+  const handleDelete = ()=>{
+    console.log("[groupCard]: deleting Group: ", groupObject.tittle)
+    console.log("[groupCard]: deleting Group_id: ", groupObject.group_id)
+
+    setIsDeleting(true)
+    //
+  }
+
   return( // ------------------------------------- return
-    <div className='groupCard'>
+    <>
+      <div className='groupCard'>
 
-      <h3 className="groupCard-head">
 
-      <div className="groupCard-head-tittle" onDoubleClick={handleDoubleClick}>
-        {isCompleted? <MdRadioButtonChecked size={24}/> : <MdRadioButtonUnchecked size={24}/>}
+        <div className='groupCard-headContainer'>
+          <h3 className="groupCard-head">
 
-        {isEditing ?
-        <EditingInput groupId={groupObject.group_id} tittle={tittle} setTittle={setTittle} setIsEditing={setIsEditing} /> :
-        <>{tittle}</> }
+            <div className="groupCard-head-tittle" onDoubleClick={handleDoubleClick}>
+              {isCompleted? <MdRadioButtonChecked size={24}/> : <MdRadioButtonUnchecked size={24}/>}
+
+              {isEditing ?
+              <EditingInput groupId={groupObject.group_id} tittle={tittle} setTittle={setTittle} setIsEditing={setIsEditing} /> :
+              <>{tittle}</> }
+
+            </div>
+
+            <button className='groupCard-head-openButton' onClick={()=>{setIsOpen(!isOpen)}}>
+              {isOpen? <IoIosArrowDropdownCircle size={30}/> : <IoIosArrowDropup size={30}/> }
+            </button>
+
+          </h3>
+          <button className='groupCard-head-deleteButton' onClick={handleDelete}> <FaTrashCan size={20}/> </button>
+        </div>
+
+        {isOpen?
+          <div className='groupCard-tasksSection'>
+            <ul className='groupCard-taskList'>
+              <DropArea groupId={groupObject.group_id} position={0} />
+              {groupObject.tasks.map((t,index)=>{
+                return (
+                    <React.Fragment key={t.task_id}>
+                      <TaskCard taskObject={t} /> 
+                      <DropArea groupId={groupObject.group_id} position={index+1} />
+                    </React.Fragment>
+                )
+              })}
+            </ul>
+
+            <CreateTask group_id={groupObject.group_id}/>
+          </div>
+          : <div className='groupCard-space'></div>
+        }
 
       </div>
-        <button className='groupCard-head-button' onClick={()=>{setIsOpen(!isOpen)}}>
-          {isOpen? <IoIosArrowDropdownCircle size={30}/> : <IoIosArrowDropup size={30}/> }
-        </button>
-      </h3>
-
-      {isOpen?
-        <div className='groupCard-tasksSection'>
-          <ul className='groupCard-taskList'>
-            <DropArea groupId={groupObject.group_id} position={0} />
-            {groupObject.tasks.map((t,index)=>{
-              return (
-                  <React.Fragment key={index}>
-                    <TaskCard taskObject={t} /> 
-                    <DropArea groupId={groupObject.group_id} position={index+1} />
-                  </React.Fragment>
-              )
-            })}
-          </ul>
-
-          <CreateTask group_id={groupObject.group_id}/>
-        </div>
-        : <div className='groupCard-space'></div>
+      {isDeleting? 
+        <Popup 
+          btn1='Cancel'
+          btn2='Delete'
+          func={()=>{deleteGroup(groupObject.group_id)}}
+          tittle='Delete Group'
+          text='Are you sure?'
+          controlState={setIsDeleting}
+        />:''
       }
-
-    </div>
+      
+    </>
   )
 }
 

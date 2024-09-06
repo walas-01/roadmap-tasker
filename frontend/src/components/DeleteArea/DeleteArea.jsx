@@ -1,9 +1,9 @@
-import { useContext, useState } from "react";
-import { FaTrashCan } from "react-icons/fa6"
-import { FaRegTrashCan } from "react-icons/fa6";
-import { GlobalContext } from "../../pages/BoardPage/Context/BoardContext";
-
+import { useContext, useState } from "react"
+import { GlobalContext } from "../../pages/BoardPage/Context/BoardContext"
 import './DeleteArea_style.css'
+
+import { FaTrashCan } from "react-icons/fa6"
+import { FaRegTrashCan } from "react-icons/fa6"
 
 function DeleteArea(){
   const [active,setActive] = useState(false)

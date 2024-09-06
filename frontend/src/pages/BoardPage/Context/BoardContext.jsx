@@ -114,7 +114,6 @@ function ContextBoard({children}){
   }
 
   const findStaredTasks = ()=>{ //---------------------------------------- [FIND] find the stared tasks to render
-
     const staredTasks = groupList.flatMap(group => group.tasks).filter(task => task.isStared)
     setTodoTasks(staredTasks)
   }
@@ -171,6 +170,14 @@ function ContextBoard({children}){
     //todo: UPDATE Group TO DATA BASE
   }
 
+  const deleteGroup = (group_id) => { //------------------------------------------------- [DELETE] delete a group from groupList
+    //1) filter groupList
+    let updatedGroupList = groupList.filter(group=>group.group_id !== group_id)
+
+    //2)set state and upload to DB
+    setGroupList(updatedGroupList)
+    //todo: UPDATE group to DB
+  }
 
   const editGroup = (group_id,newTittle)=>{ //------------------------------------------------- [UPDATE] change group's name
     //1) find group object
@@ -226,12 +233,13 @@ function ContextBoard({children}){
                 activeCard,setActiveCard,
                 todoTasks,setTodoTasks,
                 moveTask,
-                removeTask,
+                removeTask, deleteGroup,
                 createNewTask,
                 checkTask,
                 findStaredTasks,
                 starTask,starActiveTask,
-                editGroup,editTask
+                editGroup,editTask,
+
              }}>
       {children}
     </GlobalContext.Provider>

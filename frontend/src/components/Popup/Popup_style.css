@@ -1,0 +1,95 @@
+.popup-container{
+  height: 100%;
+  position: fixed;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  backdrop-filter: blur(10px);
+  z-index: 20;
+}
+
+/*------------------------------------------------------------------ the card itself */
+
+.popup{
+  width:20%;
+  background-color: var(--color-red2);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  border-bottom: 10px solid var(--color-red1);
+  border-radius: 8px;
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.popup-head{
+  width: 100%;
+  padding: 5px 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  color: var(--backcolor-black);
+  background-color: var(--color-red1);
+
+  border-top-left-radius:8px;
+  border-top-right-radius:8px;
+}
+
+.popup-body{
+  margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.popup-buttons{
+  display: flex;
+  gap: 2rem;
+}
+
+.popup-buttons button{
+  padding: 8px 15px ;
+  border-radius: 7px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.popup-cancelButton{
+  border: 2px solid var(--color-red1);
+  background:none;
+  color: var(--color-red1);
+}
+.popup-cancelButton:hover{
+  color: white;
+  border: 2px solid white;
+  transition: 0.15s;
+  scale: 1.1;
+}
+
+.popup-deleteButton{
+  color: var(--backcolor-black);
+  border: none;
+  background-color: var(--color-red1);
+
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.popup-deleteButton:hover{
+  background-color: white;
+  transition: 0.15s;
+  scale: 1.1;
+}

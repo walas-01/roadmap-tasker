@@ -49,15 +49,20 @@ function BoardPage(){ // -------------------------------------------------------
       </section>
 
       <section className="board">
-        {groupList.map((group, index) => {
+        {groupList.map( group => {
           return (
             <GroupCard
-              key={index}
+              key={group.group_id}
               groupObject={group}
             />
           );
         })}
       </section>
+
+
+
+
+
     </main>
   );
 }
