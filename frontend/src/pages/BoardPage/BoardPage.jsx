@@ -8,6 +8,7 @@ import './BoardPage_style.css'
 // --------- components import
 import Todo from '../../components/TodoBlock/TodoBlock.jsx'
 import DeleteArea from '../../components/DeleteArea/DeleteArea.jsx'
+import CreateGroup from '../../components/GroupCard/CreateGroup/CreateGroup.jsx'
 
 // ----------------------------------------------------------------------------- mackup data
 const des = 'lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s'
@@ -57,6 +58,9 @@ function BoardPage(){ // -------------------------------------------------------
             />
           );
         })}
+        
+        <CreateGroup/>
+
       </section>
 
 

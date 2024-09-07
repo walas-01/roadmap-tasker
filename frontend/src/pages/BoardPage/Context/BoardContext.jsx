@@ -66,7 +66,7 @@ function ContextBoard({children}){
   const createNewTask = (tittle,description,ownerGroup_id)=>{ //---------------------- [CREATE] create new task in a group
 
     //1) construct taskObject AND generate task_id
-    const taskObject = {task_id:Date.now().toString(),ownerGroup_id,tittle,description,isDone:false,}
+    const taskObject = {task_id: ( 't'+Date.now().toString() ) ,ownerGroup_id,tittle,description,isDone:false,}
 
     //2)get target Group
     const targetGroup = groupList.find(group => group.group_id === ownerGroup_id )
@@ -84,6 +84,17 @@ function ContextBoard({children}){
     })
 
     setGroupList(updatedGroupList)
+    //todo: UPDATE Group TO DATA BASE
+  }
+
+  const createNewGroup = (tittle)=>{ //-------------------------------------- [CREATE] create new group
+    //1) construct groupObject AND generate group_id
+    const newGroup = {group_id:( 'g'+Date.now().toString() ),tittle,tasks:[]}
+
+    //2) add to groupList and updat state
+    const newGroupList = [...groupList,newGroup]
+    setGroupList(newGroupList)
+
     //todo: UPDATE Group TO DATA BASE
   }
 
@@ -234,7 +245,7 @@ function ContextBoard({children}){
                 todoTasks,setTodoTasks,
                 moveTask,
                 removeTask, deleteGroup,
-                createNewTask,
+                createNewTask,createNewGroup,
                 checkTask,
                 findStaredTasks,
                 starTask,starActiveTask,

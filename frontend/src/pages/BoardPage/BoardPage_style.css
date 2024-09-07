@@ -7,7 +7,7 @@
 }
 
 .board{
-  width: 100%;
+  width:96%;
   margin: 1rem;
   display: flex;
   flex-direction: column;

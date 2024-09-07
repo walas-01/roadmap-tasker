@@ -1,0 +1,55 @@
+
+.createGroupForm {
+  width: 97%;
+  margin-bottom: 2px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.createGroupForm-head{
+  width: 100%;
+  padding: 6px 15px;
+
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+
+  color: var(--backcolor-black);
+  background-color: var(--color1);
+}
+
+.createGroupForm-head input{
+  padding: 6px 15px;
+  color: white;
+  background-color: var(--color-purple2);
+  border: none;
+  border-radius: 5px;
+  font-size: medium;
+}
+
+
+
+
+/*------------------------------------------- button */
+
+.createGroupButton{
+  width: 97%;
+  padding: 5px 0;
+  background: none;
+  color: var(--color1);
+  border: 3px solid var(--color1);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.createGroupButton:hover{
+  background-color: var(--color1);
+  color: var(--backcolor-black);
+  transition: 0.2s;
+  scale: 1.01;
+}

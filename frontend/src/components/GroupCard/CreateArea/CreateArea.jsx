@@ -5,7 +5,6 @@ import { GlobalContext } from '../../../pages/BoardPage/Context/BoardContext'
 
 function CreateNewTaskForm({tittle,setTittle,description,setDescription,setIsAdding,goAndCreateTask}){ //--------------------------------------------- [ CreateArea ] -
   
-
   const formRef = useRef(null);
 
   useEffect(() => {
@@ -21,9 +20,6 @@ function CreateNewTaskForm({tittle,setTittle,description,setDescription,setIsAdd
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
-
-
-
 
   const handleSubmit = (e)=>{
     e.preventDefault()

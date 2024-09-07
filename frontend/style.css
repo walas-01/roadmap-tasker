@@ -2,11 +2,13 @@
 
 :root{
   --color1:#5D51E2;
+  --color-purple2:#151328;
   --color-green1:#32AD6F;
   --color-green2:#162222;
   --color-red1:#E23838;
   --color-red2:#221622;
   --color-blue1: #0051E2;
+  --color-blue2:#001133;
   --backcolor-black:#120b1d;
 }
 
