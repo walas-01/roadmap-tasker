@@ -89,6 +89,8 @@
 }
 
 .taskCard-editForm-input{
+  height: auto;
+  overflow: auto;
   padding: 0.8rem;
 
   resize: vertical;

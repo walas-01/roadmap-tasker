@@ -9,13 +9,13 @@ import { RiArrowDownSFill,RiArrowUpSFill } from "react-icons/ri"
 import { FaRegEdit } from "react-icons/fa";
 
 const EditingTask = ({taskObject,setIsEditing})=>{
-  const [newtittle,setNewTittle] = useState(taskObject.tittle)
+  const [newTittle,setNewTittle] = useState(taskObject.tittle)
   const [newDescription,setNewDescription] = useState(taskObject.description)
 
   const {editTask} = useContext(GlobalContext)
   
-  const formRef = useRef(null);
-  useEffect(() => { // --------------------------------------------------- cancel on blur
+  const formRef = useRef(null); // --------------------------------------------------- cancel on blur
+  useEffect(() => { 
     const handleClickOutside = (event) => {
       if (formRef.current && !formRef.current.contains(event.target)) {
         setIsEditing(false); 
@@ -33,10 +33,21 @@ const EditingTask = ({taskObject,setIsEditing})=>{
   const handleSubmit = (e)=>{
     e.preventDefault()
     console.log("[editingTask]: i wanna update task!")
-    console.log("[newTittle]: ",newtittle)
+    console.log("[newTittle]: ",newTittle)
     console.log("[newDescription]: ",newDescription)
 
-    editTask(taskObject.task_id,taskObject.ownerGroup_id,newtittle,newDescription)
+    if(!newTittle.trim().length){return} // cancel if is empty
+    if(newTittle.length > 100){
+      alert("Task's Tittle can not have more than a 100 characters!")
+      return
+    }
+
+    if(newDescription.length > 1200){
+      alert("Task's Description can not have more than a 1200 characters!")
+      return
+    }
+
+    editTask(taskObject.task_id,taskObject.ownerGroup_id,newTittle,newDescription)
 
     setIsEditing(false)
   }
@@ -44,7 +55,7 @@ const EditingTask = ({taskObject,setIsEditing})=>{
 
   return(
     <form ref={formRef} className='taskCard-editForm' onSubmit={handleSubmit}>
-      <input className='taskCard-editForm-input' type="text" placeholder='Task tittle' value={newtittle} onChange={(e)=>{setNewTittle(e.target.value)}}/>
+      <input className='taskCard-editForm-input' type="text" placeholder='Task tittle' value={newTittle} onChange={(e)=>{setNewTittle(e.target.value)}}/>
       <textarea className='taskCard-editForm-input' placeholder='Task description (optional)' value={newDescription} onChange={(e)=>{setNewDescription(e.target.value)}}/>
       <div className='taskCard-editForm-buttons'>
         <button type='submit' className='taskCard-editForm-doneButton'>Done</button>

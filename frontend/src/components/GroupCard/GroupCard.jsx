@@ -25,6 +25,13 @@ const EditingInput = ({groupId,tittle,setTittle,setIsEditing})=>{  // ----------
   const handleKeyDown = (e)=>{ 
     if(e.key === 'Enter'){
 
+      if(!tittle.trim().length){ // cancel if is empty
+        setIsEditing(false)
+      } 
+      if(tittle.length > 50){
+        alert("Group's Tittle can not have more than a 50 characters!")
+      }
+
       editGroup(groupId,tittle)
 
       console.log('[Group]: tittle updated')
