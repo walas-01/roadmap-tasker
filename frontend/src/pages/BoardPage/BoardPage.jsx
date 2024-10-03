@@ -8,7 +8,7 @@ import './BoardPage_style.css'
 import Todo from '../../components/TodoBlock/TodoBlock.jsx'
 import DeleteArea from '../../components/DeleteArea/DeleteArea.jsx'
 import {Board,BoardNavigator} from '../../components/Board/Board.jsx'
-
+import {WelcomeMsg} from '../../components/Popup/Popup.jsx'
 
 // ----------------------------------------------------------------------------- mackup data
 const des = 'lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s'
@@ -43,7 +43,7 @@ function BoardPage(){ // -------------------------------------------------------
   useEffect(()=>{ // ------------------- useEffect
     ////todo: THIS IS THE PART WHERE WE FETCH DATA (with axios) FROM DATABASE AND SET THE STATES
     ////todo: MUST SET BOTH THE Group STATE AND THE Board STATE
-    setGroupList(GROUP_DATA)
+    //setGroupList(GROUP_DATA)
     //setBoardList(BOARD_DATA)
   },[])
 
@@ -51,7 +51,11 @@ function BoardPage(){ // -------------------------------------------------------
     <main className="boardPage">
 
       <section className="sideBar">
+
         <div className='innerSideBar'>
+
+          <RoadMapTasker />
+
           <Todo />
           <DeleteArea />
         </div>
@@ -62,7 +66,7 @@ function BoardPage(){ // -------------------------------------------------------
       <section className="board">
         <BoardNavigator/> 
 
-      {boardList?
+      {boardList.length !== 0?
         <Board />:
         <WelcomeMsg/>
       }
@@ -73,6 +77,14 @@ function BoardPage(){ // -------------------------------------------------------
 
     </main>
   );
+}
+
+function RoadMapTasker(){
+  return(
+    <div className='roadMapTasker'>
+      <h1>RoadMap Tasker</h1>
+    </div>
+  )
 }
 
 

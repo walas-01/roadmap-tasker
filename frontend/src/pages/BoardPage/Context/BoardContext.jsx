@@ -5,7 +5,7 @@ const GlobalContext = createContext()
 function ContextBoard({children}){
   // * -------------------------------------------------- main States, used across the board page
   const [groupList,setGroupList] = useState([])
-  const [boardList,setBoardList] = useState(null)
+  const [boardList,setBoardList] = useState([])
   const [todoTasks,setTodoTasks] = useState([])
   
   const [activeCard,setActiveCard] = useState(null)
@@ -67,7 +67,7 @@ function ContextBoard({children}){
   }
 
   const createNewTask = (tittle,description,ownerGroup_id)=>{ //---------------------- [CREATE] create new task in a group
-
+    //! do not add an id when connected to db
     //1) construct taskObject AND generate task_id
     const taskObject = {task_id: ( 't'+Date.now().toString() ) ,ownerGroup_id,tittle,description,isDone:false,}
 
@@ -91,6 +91,7 @@ function ContextBoard({children}){
   }
 
   const createNewGroup = (tittle)=>{ //-------------------------------------- [CREATE] create new group
+    //! do not add an id when connected to db
     //1) construct groupObject AND generate group_id
     const newGroup = {group_id:( 'g'+Date.now().toString() ),tittle,ownerBoard_id:activeBoardId,tasks:[]}
 
@@ -128,8 +129,10 @@ function ContextBoard({children}){
   }
 
   const findStaredTasks = ()=>{ //---------------------------------------- [FIND] find the stared tasks to render
-    const staredTasks = groupList.flatMap(group => group.tasks).filter(task => task.isStared)
-    setTodoTasks(staredTasks)
+    if(groupList.length > 0){
+      const staredTasks = groupList.flatMap(group => group.tasks).filter(task => task.isStared)
+      setTodoTasks(staredTasks)
+    }
   }
 
   const starTask = (task_id,ownerGroup_id)=>{ //------------------------------------------------- [STAR] switch the isStared property of a task
@@ -241,6 +244,19 @@ function ContextBoard({children}){
   }
 
 
+  const createNewBoard = (tittle)=>{ //----------------------------------------------- [CREATE] create new Board
+    //! do not add an id when connected to db
+    //1) construct boardObject AND generate group_id
+    const newBoard = {board_id:( 'B'+Date.now().toString() ),tittle}
+
+    //2) add to boardList AND  updat state
+    const newBoardList = [...boardList,newBoard]
+    setBoardList(newBoardList)
+
+    //todo: ADD Board TO DATA BASE
+  }
+
+
   return (
     <GlobalContext.Provider 
       value={{
@@ -256,6 +272,7 @@ function ContextBoard({children}){
                 findStaredTasks,
                 starTask,starActiveTask,
                 editGroup,editTask,
+                createNewBoard
              }}>
       {children}
     </GlobalContext.Provider>

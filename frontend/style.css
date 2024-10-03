@@ -3,12 +3,15 @@
 :root{
   --color1:#5D51E2;
   --color-purple2:#151328;
+  --color-purple3:#4E32B5;
   --color-green1:#32AD6F;
   --color-green2:#162222;
   --color-red1:#E23838;
   --color-red2:#221622;
   --color-blue1: #0051E2;
   --color-blue2:#001133;
+  --color-lightblue1:#00AFDA;
+  --color-lightblue2:#0E212F;
   --backcolor-black:#120b1d;
 }
 
@@ -20,6 +23,12 @@
 
   font-family: "Work Sans", sans-serif;
   font-style: normal;
+
+  
+}
+
+textarea:focus, input:focus{
+  outline: none;
 }
 
 html, body {
@@ -31,4 +40,5 @@ html, body {
 body{
   color: white;
   background-color: var(--backcolor-black);
+  overflow-y: scroll;
 }

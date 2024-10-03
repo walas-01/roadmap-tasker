@@ -1,0 +1,68 @@
+
+/*-------------------------------------------------------- [BoardNavigator] ----*/
+
+.boardNav{
+  padding: 1rem 0px;
+  margin-bottom: 1.5rem;
+  background-color: var(--backcolor-black);
+
+
+  position: sticky;
+  top: 0; /* Sticks to the top of the page */
+  z-index: 10;
+  user-select: none;
+}
+
+.boardNav-linksContainer{
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid var(--color1);
+
+}
+
+.boardNav p {
+  min-width: 4rem;
+  padding: 0px 30px;
+
+  text-align: center;
+  border-left: none;
+  border-right: 1px solid #ffffff9f;
+  border-bottom: 10px solid var(--backcolor-black);
+  border-top: 10px solid var(--backcolor-black);
+
+  cursor: pointer;
+}
+
+.boardNav .navLinkActive {
+  font-weight: bold;
+  background-color: var(--color1);
+  color: var(--backcolor-black);
+  border-bottom: 10px solid var(--color1);
+  border-top: 10px solid var(--color1);
+  border-right: none;
+  border-radius: 8px 8px 0px 0px;
+}
+
+.boardNav-createButton{
+  margin-left: 1rem;
+  margin-bottom: 0.2rem;
+  padding: 5px;
+
+  display: flex;
+  align-items: center;
+
+  border: 2px solid var(--color1);
+  border-radius: 0px 8px 8px 0px;
+  color: var(--color1);
+  background:none;
+}
+
+.boardNav-createButton:hover{
+  cursor: pointer;
+  background-color: var(--color1);
+  color: var(--backcolor-black);
+  transition: 0.15s;
+  scale: 1.2;
+}
+
+/*-------------------------------------------------------- [ Board ] ----*/
