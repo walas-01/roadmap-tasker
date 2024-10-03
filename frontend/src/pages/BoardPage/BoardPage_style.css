@@ -23,3 +23,26 @@
   top: 0;
   left: 5%;
 }
+
+.roadMapTasker{
+  min-width: 215px;
+  margin: 2rem 0;
+  z-index: 11;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--backcolor-black);
+  background-color: var(--color1);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.roadMapTasker h1{
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 10px;
+  font-size: 1.5rem;
+}
+

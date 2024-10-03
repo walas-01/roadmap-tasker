@@ -26,6 +26,8 @@ function CreateGroupForm({setIsCreating}){
   const handleSubmit = (e)=>{
     e.preventDefault()
 
+    console.log ('here we go')
+
     if(!tittle.trim().length){ // cancel if is empty
       setIsCreating(false)
       return
