@@ -1,0 +1,8 @@
+
+
+list of packeges used here in the client side
+
+> react react-dom
+> react-router-dom
+
+> react-icons

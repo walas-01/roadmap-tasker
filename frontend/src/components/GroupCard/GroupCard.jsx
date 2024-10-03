@@ -11,7 +11,7 @@ import { FaTrashCan } from "react-icons/fa6"
 // import components
 import TaskCard from '../TaskCard/TaskCard.jsx'
 import DropArea from '../DropArea/DropArea.jsx'
-import Popup from '../Popup/Popup.jsx'
+import { Popup } from '../Popup/Popup.jsx'
 
 
 const EditingInput = ({groupId,tittle,setTittle,setIsEditing})=>{  // ---------------------------- [ input ] -
@@ -106,7 +106,7 @@ function GroupCard({groupObject}){ // ------------------------------------------
             </div>
 
             <button className='groupCard-head-openButton' onClick={()=>{setIsOpen(!isOpen)}}>
-              {isOpen? <IoIosArrowDropdownCircle size={30}/> : <IoIosArrowDropup size={30}/> }
+              {isOpen? <IoIosArrowDropup size={30}/> : <IoIosArrowDropdownCircle size={30}/> }
             </button>
 
           </h3>
