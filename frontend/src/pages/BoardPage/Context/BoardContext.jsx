@@ -5,9 +5,11 @@ const GlobalContext = createContext()
 function ContextBoard({children}){
   // * -------------------------------------------------- main States, used across the board page
   const [groupList,setGroupList] = useState([])
-  const [activeCard,setActiveCard] = useState(null)
-
+  const [boardList,setBoardList] = useState(null)
   const [todoTasks,setTodoTasks] = useState([])
+  
+  const [activeCard,setActiveCard] = useState(null)
+  const [activeBoardId,setActiveBoardId] = useState(null)
   // * -----------------
 
   useEffect(()=>{
@@ -15,6 +17,7 @@ function ContextBoard({children}){
     console.log(groupList)
     findStaredTasks()
   },[groupList])
+
 
   const removeTask = ()=>{ //-------------------------------------------- [REMOVE] removing a task from its group
     //1)get original Group
@@ -89,7 +92,7 @@ function ContextBoard({children}){
 
   const createNewGroup = (tittle)=>{ //-------------------------------------- [CREATE] create new group
     //1) construct groupObject AND generate group_id
-    const newGroup = {group_id:( 'g'+Date.now().toString() ),tittle,tasks:[]}
+    const newGroup = {group_id:( 'g'+Date.now().toString() ),tittle,ownerBoard_id:activeBoardId,tasks:[]}
 
     //2) add to groupList and updat state
     const newGroupList = [...groupList,newGroup]
@@ -240,9 +243,12 @@ function ContextBoard({children}){
 
   return (
     <GlobalContext.Provider 
-      value={{ groupList,setGroupList,
+      value={{
+                boardList,setBoardList,
+                groupList,setGroupList,
                 activeCard,setActiveCard,
                 todoTasks,setTodoTasks,
+                activeBoardId,setActiveBoardId,
                 moveTask,
                 removeTask, deleteGroup,
                 createNewTask,createNewGroup,
@@ -250,7 +256,6 @@ function ContextBoard({children}){
                 findStaredTasks,
                 starTask,starActiveTask,
                 editGroup,editTask,
-
              }}>
       {children}
     </GlobalContext.Provider>

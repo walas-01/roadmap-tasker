@@ -1,0 +1,67 @@
+.notFoundPage{
+  width: 90%;
+  margin: 5vh auto;
+
+  display: flex;
+  justify-content: center;
+}
+
+
+/*--------------------------------- [not found card] */
+
+.notFoundCard{
+  width:20%;
+  background-color: var(--color-red2);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  border-bottom: 10px solid var(--color-red1);
+  border-radius: 8px;
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.notFoundCard-head{
+  width: 100%;
+  padding: 5px 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  color: var(--backcolor-black);
+  background-color: var(--color-red1);
+
+  border-top-left-radius:8px;
+  border-top-right-radius:8px;
+}
+
+.notFoundCard-body{
+  margin: 2rem 0 1rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+
+.notFoundCard-backButton{
+  padding: 8px 15px ;
+  border-radius: 7px;
+  font-weight: bold;
+  cursor: pointer;
+
+  border: 2px solid var(--color-red1);
+  background:none;
+  color: var(--color-red1);
+}
+
+.notFoundCard-backButton:hover{
+  color: white;
+  border: 2px solid white;
+  transition: 0.15s;
+  scale: 1.1;
+}
