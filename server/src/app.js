@@ -3,6 +3,9 @@ import cors from 'cors'
 import helmet from 'helmet'
 const app = express()
 
+// import routers
+import userRouter from '../routers/user_router.js'
+
 
 // ---- middlewares
 app.use(express.json())
@@ -16,7 +19,7 @@ app.use(helmet())
 
 // ------ routers
 
-app.get('/',(req,res)=>{res.status(200).send({message:'tobi'})})
+app.use('/api',userRouter)
 
 
 export default app
