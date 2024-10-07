@@ -76,6 +76,13 @@
   font-size: 0.9rem;
   font-weight: 300;
   background-color: #151328;
+
+
+}
+
+.taskCard-body p{
+  inline-size: 75rem;
+  overflow-wrap: break-word;
 }
 
 

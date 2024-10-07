@@ -18,13 +18,13 @@
 }
 
 .innerSideBar{
-  width: 15%;
-  position: fixed;
-  top: 0;
-  left: 5%;
+  width: 85%;
+  position: sticky;
+  top: 20px;;
 }
 
 .roadMapTasker{
+  width: 100%;
   min-width: 215px;
   margin: 2rem 0;
   z-index: 11;

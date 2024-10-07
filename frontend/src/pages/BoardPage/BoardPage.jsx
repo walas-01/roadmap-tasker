@@ -48,9 +48,9 @@ function BoardPage(){ // -------------------------------------------------------
   },[])
 
   return ( ///--------------------------- (return)
-    <main className="boardPage">
+    <section className="boardPage">
 
-      <section className="sideBar">
+      <aside className="sideBar">
 
         <div className='innerSideBar'>
 
@@ -59,11 +59,9 @@ function BoardPage(){ // -------------------------------------------------------
           <Todo />
           <DeleteArea />
         </div>
-      </section>
+      </aside>
 
-
-
-      <section className="board">
+      <main className="board">
         <BoardNavigator/> 
 
       {boardList.length !== 0?
@@ -71,11 +69,11 @@ function BoardPage(){ // -------------------------------------------------------
         <WelcomeMsg/>
       }
 
-      </section>
+      </main>
 
 
 
-    </main>
+    </section>
   );
 }
 

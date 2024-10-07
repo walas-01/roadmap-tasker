@@ -214,17 +214,19 @@
 }
 
 .boardPopup input{
-  padding: 8px 3px;
+  padding: 8px 10px;
   width: 100%;
 
 
   border: 3px solid var(--color1);
   border-radius: 8px;
+  background-color: var(--backcolor-black);
   color: white;
-  background:none;
+
 }
 
 .boardPopup input::placeholder{
   color: var(--color-purple3);
+  font-style: italic;
   font-weight: bold;
 }
