@@ -10,7 +10,7 @@ userController.getAllUsers = asyncWrap (async (req,res,next)=>{ // -------------
 
   const userList = await User.find()
 
-  //! how to throw a custom error:
+  //! this is how to throw a custom error:
   // if(userList.length === 0 ){return next(new CustomError(300,'No users found'))}
 
   res.status(200).send({ message: 'getting all users', data: userList })

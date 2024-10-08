@@ -6,3 +6,5 @@ list of packeges used here in the client side
 > react-router-dom
 
 > react-icons
+
+> axios

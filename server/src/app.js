@@ -4,10 +4,10 @@ import helmet from 'helmet'
 const app = express()
 
 
-import errorHandler from '../middlewares/error-handler.js'
+import errorHandler from './middlewares/error-handler.js'
 
 // import routers
-import userRouter from '../routers/user_router.js'
+import userRouter from './routers/user_router.js'
 
 
 // ---- middlewares
