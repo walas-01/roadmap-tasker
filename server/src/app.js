@@ -1,5 +1,6 @@
 import express from 'express'
 import cors from 'cors'
+import cookieParser from 'cookie-parser'
 import helmet from 'helmet'
 const app = express()
 
@@ -12,6 +13,7 @@ import userRouter from './routers/user_router.js'
 
 // ---- middlewares
 app.use(express.json())
+app.use(cookieParser())
 app.use(cors({
   origin:'http://localhost:5173',
   credentials:true,

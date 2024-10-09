@@ -1,8 +1,10 @@
-import { useContext, useEffect} from 'react'
+import { useContext, useEffect,useState} from 'react'
 import React from 'react'
 
 import { GlobalContext } from './Context/BoardContext.jsx'
 import './BoardPage_style.css'
+
+import fetcher from '../../axios/axiosMethods.js'
 
 // --------- components import
 import Todo from '../../components/TodoBlock/TodoBlock.jsx'
@@ -39,37 +41,60 @@ const BOARD_DATA = [
 
 function BoardPage(){ // --------------------------------------------------------------------------- [ BoardPage COMPONENT ]  
   const {setGroupList,boardList,setBoardList} = useContext(GlobalContext)
+  const [isLoggedIn,setIsloggedIn] = useState()
+
 
   useEffect(()=>{ // ------------------- useEffect
     ////todo: THIS IS THE PART WHERE WE FETCH DATA (with axios) FROM DATABASE AND SET THE STATES
     ////todo: MUST SET BOTH THE Group STATE AND THE Board STATE
     //setGroupList(GROUP_DATA)
     //setBoardList(BOARD_DATA)
+
+    const start = async()=>{
+      try {
+        const respose = await fetcher.protected()
+        console.log(respose)
+        setIsloggedIn(true)
+      } catch (err) {
+        console.log(err.response.status)
+        if(err.response.status === 403){setIsloggedIn(false)}
+      }
+    }
+
+    start()
   },[])
 
   return ( ///--------------------------- (return)
     <section className="boardPage">
 
-      <aside className="sideBar">
+      {isLoggedIn?
+        <>
+          <aside className="sideBar">
+            <div className='innerSideBar'>
 
-        <div className='innerSideBar'>
+              <RoadMapTasker />
 
-          <RoadMapTasker />
+              <Todo />
+              <DeleteArea />
+            </div>
+          </aside>
 
-          <Todo />
-          <DeleteArea />
-        </div>
-      </aside>
+          <main className="board">
+            <BoardNavigator/> 
+            {boardList.length !== 0?
+              <Board />:
+              <WelcomeMsg/>
+            }
+          </main>
+        </> :
 
-      <main className="board">
-        <BoardNavigator/> 
-
-      {boardList.length !== 0?
-        <Board />:
-        <WelcomeMsg/>
+        NotLoggedInCard()
+      
+    
       }
 
-      </main>
+
+      
 
 
 
@@ -78,12 +103,28 @@ function BoardPage(){ // -------------------------------------------------------
 }
 
 function RoadMapTasker(){
+  //todo: this component must show the username and a logout button 
   return(
     <div className='roadMapTasker'>
       <h1>RoadMap Tasker</h1>
     </div>
   )
 }
+
+function NotLoggedInCard(){
+  return(
+    <div className='notLoggedIn'>
+      <div className='notLoggedIn-head'>
+        <h2>Welcome to RoadMapTasker!</h2>
+      </div>
+
+      <div className='notLoggedIn-body'>
+        <p>Looks like you are not logged in. Register to start managing your tasks.</p>
+      </div>
+    </div>
+  )
+}
+
 
 
 export default BoardPage

@@ -1,6 +1,7 @@
 import {useEffect,useState} from 'react'
 
 import fetcher from '../../axios/axiosMethods.js'
+import {useNavigate} from 'react-router-dom'
 
 import './LoginPage_style.css'
 import { FaUser,FaLock } from "react-icons/fa"
@@ -53,22 +54,19 @@ function SignInForm(){ //------------------------------------- [ SIGN IN ] -
 
   const handleSubmit = async (e)=>{
     e.preventDefault()
-    console.log(registerObject)
-
 
     if(!registerObject.username){return setError('Username can not be empty')}
     if(!registerObject.email){return setError('Must provide an Email to register')}
     if(!registerObject.password){return setError('Must provide a password to register')}
 
-
-    
     try {
       const data = await fetcher.register(registerObject.username,registerObject.email,registerObject.password)
       console.log(data)
       setError('Successfully registered!')
     } catch (err) {
-      console.log(err)
-    setError('Woops! There was an error')
+      console.log(err.response)
+      if(err.response.data.message){setError(err.response.data.message)}
+      if(err.response.data.error){setError(err.response.data.error)}
     }
   }
 
@@ -107,9 +105,36 @@ function SignInForm(){ //------------------------------------- [ SIGN IN ] -
   )
 }
 
+
+
+
 function LoginForm(){ //------------------------------------- [ LOGIN ] -
+  const [loginObject,setLoginObject] = useState({})
+  const [error,setError] = useState('')
+
+  const navigator = useNavigate()
+
+  const handleSubmit = async (e)=>{
+    e.preventDefault()
+
+    if(!loginObject.email){return setError('Must provide an Email to login')}
+    if(!loginObject.password){return setError('Must provide a password to login')}
+
+    try {
+      const response = await fetcher.login(loginObject.email,loginObject.password)
+      console.log(response.data)
+
+
+      setError('Okey!')
+      navigator('/board')
+    } catch (err) {
+      console.log(err.response)
+      if(err.response.data.message){setError(err.response.data.message)}
+    }
+  }
+
   return (
-    <form className="panel-form loginForm">
+    <form className="panel-form loginForm" onSubmit={handleSubmit}>
       <div className="panel-form-head">
         <h3>Login</h3>
         <img src={icon2} alt="sign in icon" />
@@ -117,15 +142,19 @@ function LoginForm(){ //------------------------------------- [ LOGIN ] -
 
       <div className="panel-form-body">
         <div className="panel-form-input">
-          <FaUser size={30} className="input-icon" /><input type="text" placeholder="Email" />
+          <FaUser size={30} className="input-icon" /><input type="text" placeholder="Email" onChange={(e)=>{setLoginObject({...loginObject,email:e.target.value})}} />
         </div>
 
         <div className="panel-form-input">
-          <FaLock size={30} className="input-icon" /><input type="password" placeholder="Password" />
+          <FaLock size={30} className="input-icon" /><input type="password" placeholder="Password" onChange={(e)=>{setLoginObject({...loginObject,password:e.target.value})}} />
+        </div>
+
+        <div>
+          <p>{error}</p>
         </div>
 
         <div className="panel-form-button-container">
-          <button>Login</button>
+          <button type='submit'>Login</button>
         </div>
       </div>
     </form>

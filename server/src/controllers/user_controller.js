@@ -1,9 +1,12 @@
 import User from '../models/user_model.js'
 import bcrypt from 'bcrypt'
-
+import jwt from 'jsonwebtoken'
+import dotenv from 'dotenv'
+dotenv.config()
 
 import asyncWrap from '../middlewares/async-wrap.js'
 import CustomError from '../customError/custom-error.js'
+import { response } from 'express'
 const userController = {}
 
 
@@ -22,7 +25,7 @@ userController.getAllUsers = asyncWrap (async (req,res,next)=>{ // -------------
 
 })
 
-userController.register = asyncWrap(async(req,res,next)=>{
+userController.register = asyncWrap(async(req,res,next)=>{ // ---------------------------------- [REGISTER] -
   console.log(">[POST]: creating new user")
 
   const {username,email,password} = req.body
@@ -46,5 +49,40 @@ userController.register = asyncWrap(async(req,res,next)=>{
 
   res.status(200).send({message:'User registered.'})
 })
+
+userController.login = asyncWrap(async(req,res,next)=>{ // ---------------------------------- [LOGIN] -
+  console.log(">[LOGIN]: loging user")
+
+  const {email,password} = req.body
+
+  const user = await User.findOne({email})
+
+  if(!user){return next(new CustomError(400,'No user found with that email'))} // ERROR if not exist
+  const isCorrectPass = await bcrypt.compare(password,user.password)
+  console.log(isCorrectPass)
+  if(!isCorrectPass){return next(new CustomError(400,'Incorrect password'))} // ERROR if wrong password
+
+  const token = jwt.sign({user_id:user.user_id,username:user.username},process.env.JWT_SECRET,{
+    expiresIn: '15d'
+  })
+
+  res.cookie('access_token',token,{
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production', 
+    sameSite: 'strict',
+    maxAge: 60 * 60 * 1000 * 24 * 15,
+  }).status(200).send({message:'User logged in. Session started.'})
+})
+
+
+userController.protected = asyncWrap(async(req,res,next)=>{ // ---------------------------------- [PROTECTED] -
+  console.log('>[PROTECTED]')
+
+  const {user_id,username} = req.user
+
+  console.log("[getting tasks for ",username,"]")
+  res.status(200).send({message:('here is your data, ',username),data:{caca:true,user_id}})
+})
+
 
 export default userController
