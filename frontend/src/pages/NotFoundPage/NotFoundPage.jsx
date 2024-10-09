@@ -17,7 +17,7 @@ function NotFoundPage(){
         </div>
 
         <div className='notFoundCard-body'>
-          <p>You got far from home, buddy</p>
+          <p>It seems there were an error!</p>
           <button className='notFoundCard-backButton' onClick={handleClick}>Go back</button>
         </div>
 

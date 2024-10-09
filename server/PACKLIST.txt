@@ -1,0 +1,7 @@
+
+list of packeges used here in the server side
+
+> express
+> mongoose
+> dotenv
+

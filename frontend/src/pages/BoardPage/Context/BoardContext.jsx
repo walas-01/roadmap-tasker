@@ -69,7 +69,7 @@ function ContextBoard({children}){
   const createNewTask = (tittle,description,ownerGroup_id)=>{ //---------------------- [CREATE] create new task in a group
     //! do not add an id when connected to db
     //1) construct taskObject AND generate task_id
-    const taskObject = {task_id: ( 't'+Date.now().toString() ) ,ownerGroup_id,tittle,description,isDone:false,}
+    const taskObject = {task_id: ( 't'+Date.now().toString() ) ,ownerGroup_id,tittle,description,isDone:false}
 
     //2)get target Group
     const targetGroup = groupList.find(group => group.group_id === ownerGroup_id )

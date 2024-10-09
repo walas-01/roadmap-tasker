@@ -59,7 +59,7 @@ function BoardNavigator(){ // --------------------------------------- [ BoardNav
 
   return(
     <>
-      <div className="boardNav"> 
+      <nav className="boardNav"> 
         <div className='boardNav-linksContainer'>
 
           { returnNavButtons() }
@@ -72,7 +72,7 @@ function BoardNavigator(){ // --------------------------------------- [ BoardNav
 
           }
         </div>
-      </div>
+      </nav>
     
       {isCreatingBoard? <CreateBoardPopup controlState={setIsCreatingBoard} tittleState={setBoardLittle} func={createBoard}/> : ''}
     </>
@@ -93,6 +93,8 @@ function Board(){
 
   return (
     <>
+
+      <h1>Que honda!</h1>
 
       {myGroupList.map((group)=>{ return <GroupCard key={group.group_id} groupObject={group}/>   })}
 
