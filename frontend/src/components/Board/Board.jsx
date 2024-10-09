@@ -94,6 +94,8 @@ function Board(){
   return (
     <>
 
+      <h1>Que honda!</h1>
+
       {myGroupList.map((group)=>{ return <GroupCard key={group.group_id} groupObject={group}/>   })}
 
 
