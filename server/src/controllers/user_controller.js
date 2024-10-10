@@ -80,8 +80,7 @@ userController.protected = asyncWrap(async(req,res,next)=>{ // -----------------
 
   const {user_id,username} = req.user
 
-  console.log("[getting tasks for ",username,"]")
-  res.status(200).send({message:('here is your data, ',username),data:{caca:true,user_id}})
+  res.status(200).send({user_id:user_id,username:username})
 })
 
 

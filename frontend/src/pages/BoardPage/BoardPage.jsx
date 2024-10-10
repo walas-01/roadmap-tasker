@@ -1,4 +1,4 @@
-import { useContext, useEffect,useState} from 'react'
+import { useContext, useEffect} from 'react'
 import React from 'react'
 
 import { GlobalContext } from './Context/BoardContext.jsx'
@@ -40,8 +40,7 @@ const BOARD_DATA = [
 ]
 
 function BoardPage(){ // --------------------------------------------------------------------------- [ BoardPage COMPONENT ]  
-  const {setGroupList,boardList,setBoardList} = useContext(GlobalContext)
-  const [isLoggedIn,setIsloggedIn] = useState()
+  const {setGroupList,boardList,setBoardList,activeUser,setActiveUser } = useContext(GlobalContext)
 
 
   useEffect(()=>{ // ------------------- useEffect
@@ -52,12 +51,13 @@ function BoardPage(){ // -------------------------------------------------------
 
     const start = async()=>{
       try {
-        const respose = await fetcher.protected()
-        console.log(respose)
-        setIsloggedIn(true)
+        const response = await fetcher.protected()
+        console.log(response.data)
+
+        setActiveUser(response.data.user_id) // set the activeUser
       } catch (err) {
         console.log(err.response.status)
-        if(err.response.status === 403){setIsloggedIn(false)}
+        if(err.response.status === 403){setActiveUser(null)} // no activeUser
       }
     }
 
@@ -67,7 +67,7 @@ function BoardPage(){ // -------------------------------------------------------
   return ( ///--------------------------- (return)
     <section className="boardPage">
 
-      {isLoggedIn?
+      {activeUser?
         <>
           <aside className="sideBar">
             <div className='innerSideBar'>

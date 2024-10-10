@@ -10,6 +10,7 @@ function ContextBoard({children}){
   
   const [activeCard,setActiveCard] = useState(null)
   const [activeBoardId,setActiveBoardId] = useState(null)
+  const [activeUser,setActiveUser] = useState(null)
   // * -----------------
 
   useEffect(()=>{
@@ -36,6 +37,8 @@ function ContextBoard({children}){
     
     
     setGroupList(updatedGroupList)
+
+    //* fetcher.groupUPDATE(originalGroup)
     //todo: UPDATE Group TO DATA BASE
   }
 
@@ -63,11 +66,12 @@ function ContextBoard({children}){
     })
 
     setGroupList(updatedGroupList)
+
+    //* fetcher.groupUPDATE(targetGroup)
     //todo: UPDATE Group TO DATA BASE
   }
 
   const createNewTask = (tittle,description,ownerGroup_id)=>{ //---------------------- [CREATE] create new task in a group
-    //! do not add an id when connected to db
     //1) construct taskObject AND generate task_id
     const taskObject = {task_id: ( 't'+Date.now().toString() ) ,ownerGroup_id,tittle,description,isDone:false}
 
@@ -87,18 +91,22 @@ function ContextBoard({children}){
     })
 
     setGroupList(updatedGroupList)
+
+    //* fetcher.groupUPDATE(targetGroup)
     //todo: UPDATE Group TO DATA BASE
   }
 
   const createNewGroup = (tittle)=>{ //-------------------------------------- [CREATE] create new group
     //! do not add an id when connected to db
+    //? must have ownerUser_id
     //1) construct groupObject AND generate group_id
     const newGroup = {group_id:( 'g'+Date.now().toString() ),tittle,ownerBoard_id:activeBoardId,tasks:[]}
 
-    //2) add to groupList and updat state
+    //2) add to groupList and update state
     const newGroupList = [...groupList,newGroup]
     setGroupList(newGroupList)
 
+    //* fetcher.groupCREATE(newGroup)
     //todo: UPDATE Group TO DATA BASE
   }
 
@@ -125,6 +133,8 @@ function ContextBoard({children}){
     })
 
     setGroupList(updatedGroupList)
+
+    //* fetcher.groupUPDATE(ownerGroup)
     //todo: UPDATE Group TO DATA BASE
   }
 
@@ -139,7 +149,7 @@ function ContextBoard({children}){
     //1)get owner group
     const ownerGroup = groupList.find(group => group.group_id === ownerGroup_id )
 
-    //2) find the task and switch its isDone property
+    //2) find the task and switch its isStared property
     ownerGroup.tasks = ownerGroup.tasks.map((task)=>{
       if(task.task_id == task_id){
         return( {...task,isStared:!task.isStared} )
@@ -158,6 +168,8 @@ function ContextBoard({children}){
     })
 
     setGroupList(updatedGroupList)
+
+    //* fetcher.groupUPDATE(ownerGroup)
     //todo: UPDATE Group TO DATA BASE
   }
 
@@ -165,11 +177,11 @@ function ContextBoard({children}){
     //1)get owner group of activeCard
     const ownerGroup = groupList.find(group => group.group_id === activeCard.ownerGroup_id )
 
-    //2) find the task and switch its isDone property
+    //2) find the task and switch its isStared property
     ownerGroup.tasks = ownerGroup.tasks.map((task)=>{
       if(task.task_id == activeCard.task_id){
         return( {...task,isStared:!task.isStared} )
-      }else{
+      }else{ 
         return task
       }
     })
@@ -183,7 +195,9 @@ function ContextBoard({children}){
       }
     })
 
-    setGroupList(updatedGroupList) 
+    setGroupList(updatedGroupList)
+
+    //* fetcher.groupUPDATE(ownerGroup)
     //todo: UPDATE Group TO DATA BASE
   }
 
@@ -193,6 +207,8 @@ function ContextBoard({children}){
 
     //2)set state and upload to DB
     setGroupList(updatedGroupList)
+
+    //* fetcher.groupDELETE(group_id)
     //todo: UPDATE group to DB
   }
 
@@ -212,7 +228,9 @@ function ContextBoard({children}){
       }
     })
 
-    setGroupList(updatedGroupList) 
+    setGroupList(updatedGroupList)
+
+    //* fetcher.groupUPDATE(updatedGroup)
     //todo: UPDATE Group TO DATA BASE
   }
 
@@ -240,6 +258,8 @@ function ContextBoard({children}){
 
     //4)set state and upload to DB
     setGroupList(updatedGroupList)
+
+    //* fetcher.groupUPDATE(ownerGroup)
     //todo: UPDATE Group TO DATA BASE
   }
 
@@ -265,6 +285,7 @@ function ContextBoard({children}){
                 activeCard,setActiveCard,
                 todoTasks,setTodoTasks,
                 activeBoardId,setActiveBoardId,
+                activeUser,setActiveUser,
                 moveTask,
                 removeTask, deleteGroup,
                 createNewTask,createNewGroup,
