@@ -4,7 +4,8 @@ import React from 'react'
 import { GlobalContext } from './Context/BoardContext.jsx'
 import './BoardPage_style.css'
 
-import fetcher from '../../axios/axiosMethods.js'
+import boardFetcher from '../../axios/boardMethods.js'
+import groupFetcher from '../../axios/groupMethods.js'
 
 // --------- components import
 import Todo from '../../components/TodoBlock/TodoBlock.jsx'
@@ -51,13 +52,20 @@ function BoardPage(){ // -------------------------------------------------------
 
     const start = async()=>{
       try {
-        const response = await fetcher.protected()
-        console.log(response.data)
+        console.log('[getting groups and boards. . .]')
+        const boardRes = await boardFetcher.GET()
+        const groupRes = await groupFetcher.GET()
 
-        setActiveUser(response.data.user_id) // set the activeUser
+        console.log(boardRes.data)
+        console.log(groupRes.data)
+
+        setBoardList(boardRes.data)
+        setGroupList(groupRes.data)
+
+        setActiveUser(true) // set the activeUser
       } catch (err) {
-        console.log(err.response.status)
-        if(err.response.status === 403){setActiveUser(null)} // no activeUser
+        console.log(err)
+        if(err.response && err.response.status === 403){setActiveUser(null)} // no activeUser
       }
     }
 

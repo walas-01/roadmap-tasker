@@ -1,6 +1,6 @@
 import {useEffect,useState} from 'react'
 
-import fetcher from '../../axios/axiosMethods.js'
+import userFetcher from '../../axios/userMethods.js'
 import {useNavigate} from 'react-router-dom'
 
 import './LoginPage_style.css'
@@ -15,7 +15,7 @@ function LoginPage(){ //------------------------------------------------------- 
 
     const getU = async()=>{
       try {
-        const res = await fetcher.getAllUsers()
+        const res = await userFetcher.getAllUsers()
         console.log(res.data)
       } catch (err) {console.log(err)}
     }
@@ -60,7 +60,7 @@ function SignInForm(){ //------------------------------------- [ SIGN IN ] -
     if(!registerObject.password){return setError('Must provide a password to register')}
 
     try {
-      const data = await fetcher.register(registerObject.username,registerObject.email,registerObject.password)
+      const data = await userFetcher.register(registerObject.username,registerObject.email,registerObject.password)
       console.log(data)
       setError('Successfully registered!')
     } catch (err) {
@@ -121,7 +121,7 @@ function LoginForm(){ //------------------------------------- [ LOGIN ] -
     if(!loginObject.password){return setError('Must provide a password to login')}
 
     try {
-      const response = await fetcher.login(loginObject.email,loginObject.password)
+      const response = await userFetcher.login(loginObject.email,loginObject.password)
       console.log(response.data)
 
 

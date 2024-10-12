@@ -2,6 +2,9 @@ import { createContext, useState,useEffect } from "react"
 
 const GlobalContext = createContext()
 
+import boardFetcher from "../../../axios/boardMethods.js"
+import groupFetcher from "../../../axios/groupMethods.js"
+
 function ContextBoard({children}){
   // * -------------------------------------------------- main States, used across the board page
   const [groupList,setGroupList] = useState([])
@@ -14,10 +17,13 @@ function ContextBoard({children}){
   // * -----------------
 
   useEffect(()=>{
-    console.log("[GroupList]: Updated!")
+    console.log("--[GroupList]:")
     console.log(groupList)
+    console.log("--[BoardList]:")
+    console.log(boardList)
+
     findStaredTasks()
-  },[groupList])
+  },[groupList,boardList])
 
 
   const removeTask = ()=>{ //-------------------------------------------- [REMOVE] removing a task from its group
@@ -96,18 +102,19 @@ function ContextBoard({children}){
     //todo: UPDATE Group TO DATA BASE
   }
 
-  const createNewGroup = (tittle)=>{ //-------------------------------------- [CREATE] create new group
-    //! do not add an id when connected to db
-    //? must have ownerUser_id
-    //1) construct groupObject AND generate group_id
-    const newGroup = {group_id:( 'g'+Date.now().toString() ),tittle,ownerBoard_id:activeBoardId,tasks:[]}
+  const createNewGroup = async (tittle)=>{ //-------------------------------------- [CREATE] create new group
+    try {
+      const response = await groupFetcher.CREATE(activeBoardId,tittle)
+      
+      //1) construct groupObject using tittle and obtainer group_id
+      const newGroup = {group_id:response.data.group_id,tittle,ownerBoard_id:activeBoardId,tasks:[]}
 
-    //2) add to groupList and update state
-    const newGroupList = [...groupList,newGroup]
-    setGroupList(newGroupList)
+      //2) add to groupList and update state
+      const newGroupList = [...groupList,newGroup]
+      setGroupList(newGroupList)
 
-    //* fetcher.groupCREATE(newGroup)
-    //todo: UPDATE Group TO DATA BASE
+
+    } catch (err) {console.log(err)}
   }
 
   const checkTask = (task_id,ownerGroup_id)=>{ //---------------------- [CHECK] update task to be checked/unchecked
@@ -273,6 +280,8 @@ function ContextBoard({children}){
     const newBoardList = [...boardList,newBoard]
     setBoardList(newBoardList)
 
+
+    try {boardFetcher.CREATE(tittle)} catch (err) {console.log(err)}
     //todo: ADD Board TO DATA BASE
   }
 

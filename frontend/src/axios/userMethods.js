@@ -1,10 +1,10 @@
 import axios from 'axios'
 
 
-const fetcher = {}
+const userFetcher = {}
 
 
-fetcher.getAllUsers = async()=>{
+userFetcher.getAllUsers = async()=>{
   let getUsersCFG = {
     method: 'get',
     maxBodyLength: Infinity,
@@ -17,7 +17,7 @@ fetcher.getAllUsers = async()=>{
 }
 
 
-fetcher.register = async(username,email,password)=>{ //----------- [ register ] -
+userFetcher.register = async(username,email,password)=>{ //----------- [ register ] -
   let registerConfig = {
     method: 'post',
     maxBodyLength: Infinity,
@@ -36,7 +36,7 @@ fetcher.register = async(username,email,password)=>{ //----------- [ register ] 
 
 
 
-fetcher.login = async(email,password)=>{ //-------------- [ login ] -
+userFetcher.login = async(email,password)=>{ //-------------- [ login ] -
   let loginConfig = {
     method: 'post',
     maxBodyLength: Infinity,
@@ -56,27 +56,4 @@ fetcher.login = async(email,password)=>{ //-------------- [ login ] -
   }
 }
 
-
-fetcher.protected = async()=>{ //-------------- [ protected ] -
-  let protectedConfig = {
-    method: 'get',
-    maxBodyLength: Infinity,
-    withCredentials:true,
-    url: 'http://localhost:4001/api/protected',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    withCredentials: true
-  }
-
-  try {
-    const response = await axios.request(protectedConfig)
-    return response
-  } catch (err) {
-    throw err
-  }
-}
-
-
-
-export default fetcher
+export default userFetcher

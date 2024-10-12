@@ -1,6 +1,6 @@
-import {Schema,model} from 'mongoose'
+import mongoose from 'mongoose'
 
-const groupSchema = new Schema({
+const groupSchema = new mongoose.Schema({
   group_id: {
     type: mongoose.Schema.Types.ObjectId,
     default: () => new mongoose.Types.ObjectId()
@@ -21,11 +21,11 @@ const groupSchema = new Schema({
     trim:true
   },
   tasks: {
-    type: [Schema.Types.Mixed],
+    type: [mongoose.Schema.Types.Mixed],
     default: []
   }
 })
 
 
 
-export default model('Group',groupSchema)
+export default mongoose.model('Group',groupSchema)

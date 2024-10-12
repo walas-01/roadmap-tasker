@@ -6,7 +6,6 @@ dotenv.config()
 
 import asyncWrap from '../middlewares/async-wrap.js'
 import CustomError from '../customError/custom-error.js'
-import { response } from 'express'
 const userController = {}
 
 
@@ -73,15 +72,5 @@ userController.login = asyncWrap(async(req,res,next)=>{ // ---------------------
     maxAge: 60 * 60 * 1000 * 24 * 15,
   }).status(200).send({message:'User logged in. Session started.'})
 })
-
-
-userController.protected = asyncWrap(async(req,res,next)=>{ // ---------------------------------- [PROTECTED] -
-  console.log('>[PROTECTED]')
-
-  const {user_id,username} = req.user
-
-  res.status(200).send({user_id:user_id,username:username})
-})
-
 
 export default userController

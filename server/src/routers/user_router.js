@@ -1,17 +1,13 @@
 import express from 'express'
 import userController from '../controllers/user_controller.js'
 
-import authMiddleware from '../middlewares/auth-middleware.js'
-
 const userRouter = express.Router()
 
+//! MUST DELETE getAllUSers
 userRouter.route('/users').get(userController.getAllUsers)
-
+// POST /api/register
 userRouter.route('/register').post(userController.register)
+// POST /api/login
 userRouter.route('/login').post(userController.login)
-
-
-userRouter.route('/protected').get(authMiddleware,userController.protected)
-
 
 export default userRouter
