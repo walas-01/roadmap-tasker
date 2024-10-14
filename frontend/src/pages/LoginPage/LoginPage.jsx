@@ -129,7 +129,7 @@ function LoginForm(){ //------------------------------------- [ LOGIN ] -
       navigator('/board')
     } catch (err) {
       console.log(err.response)
-      if(err.response.data.message){setError(err.response.data.message)}
+      if(err.response && err.response.data.message){setError(err.response.data.message)}
     }
   }
 

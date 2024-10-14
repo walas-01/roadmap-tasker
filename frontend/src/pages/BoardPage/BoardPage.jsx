@@ -45,19 +45,12 @@ function BoardPage(){ // -------------------------------------------------------
 
 
   useEffect(()=>{ // ------------------- useEffect
-    ////todo: THIS IS THE PART WHERE WE FETCH DATA (with axios) FROM DATABASE AND SET THE STATES
-    ////todo: MUST SET BOTH THE Group STATE AND THE Board STATE
-    //setGroupList(GROUP_DATA)
-    //setBoardList(BOARD_DATA)
 
     const start = async()=>{
       try {
         console.log('[getting groups and boards. . .]')
         const boardRes = await boardFetcher.GET()
         const groupRes = await groupFetcher.GET()
-
-        console.log(boardRes.data)
-        console.log(groupRes.data)
 
         setBoardList(boardRes.data)
         setGroupList(groupRes.data)
@@ -95,16 +88,8 @@ function BoardPage(){ // -------------------------------------------------------
             }
           </main>
         </> :
-
         NotLoggedInCard()
-      
-    
       }
-
-
-      
-
-
 
     </section>
   );

@@ -32,4 +32,39 @@ groupController.createGroup = asyncWrap(async(req,res,next)=>{ // --------------
 })
 
 
+groupController.deleteGroup = asyncWrap( async(req,res,next)=>{ // ------------------------------- [DELETE] -
+  console.log('[Group]: DELETE')
+
+  const {group_id} = req.body
+
+  await Group.deleteOne({group_id})
+
+  res.status(204).send({message:'group deleted'})
+})
+
+groupController.updateGroup = asyncWrap( async(req,res,next)=>{ // ------------------------------- [UPDATE] -
+  console.log('>[Group]: UPDATE')
+
+  const {group_id,groupObject} = req.body
+
+  console.log("i want to update group ",group_id)
+  console.log(groupObject)
+
+
+  const result = await Group.updateOne(
+    {group_id},
+    {$set:groupObject}
+  )
+  console.log(result)
+
+
+  if (result.modifiedCount === 0) {
+    console.log('No se encontró el item o no se realizaron cambios')
+    res.status(200).send({message:'no group modified'})
+  }
+
+  res.status(200).send({message:'group updated, i guess?'})
+})
+
+
 export default groupController

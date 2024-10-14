@@ -26,7 +26,7 @@ function ContextBoard({children}){
   },[groupList,boardList])
 
 
-  const removeTask = ()=>{ //-------------------------------------------- [REMOVE] removing a task from its group
+  const removeTask = async ()=>{ //-------------------------------------------- [REMOVE] removing a task from its group
     //1)get original Group
     const originalGroup =  groupList.find(group => group.group_id === activeCard.ownerGroup_id)
   
@@ -41,15 +41,15 @@ function ContextBoard({children}){
       }
     })
     
-    
     setGroupList(updatedGroupList)
 
-    //* fetcher.groupUPDATE(originalGroup)
-    //todo: UPDATE Group TO DATA BASE
+    try { //todo: [DONE]
+      await groupFetcher.UPDATE(originalGroup.group_id,originalGroup)
+    } catch (err) {console.log()}
   }
 
-  const moveTask = (groupTargetId,position)=>{ //-------------------------- [MOVE] moving tasks to other groups
-    // 1) remove task from group AND update state
+  const moveTask = async (groupTargetId,position)=>{ //-------------------------- [MOVE] moving tasks to other groups
+    // 1) remove task from group
     let updatedGroupList = removeTask()
 
     //2)get target Group
@@ -73,11 +73,13 @@ function ContextBoard({children}){
 
     setGroupList(updatedGroupList)
 
-    //* fetcher.groupUPDATE(targetGroup)
-    //todo: UPDATE Group TO DATA BASE
+
+    try { //todo: [DONE]
+      await groupFetcher.UPDATE(groupTargetId,targetGroup)
+    } catch (err) {console.log()}
   }
 
-  const createNewTask = (tittle,description,ownerGroup_id)=>{ //---------------------- [CREATE] create new task in a group
+  const createNewTask = async (tittle,description,ownerGroup_id)=>{ //---------------------- [CREATE] create new task in a group
     //1) construct taskObject AND generate task_id
     const taskObject = {task_id: ( 't'+Date.now().toString() ) ,ownerGroup_id,tittle,description,isDone:false}
 
@@ -98,13 +100,14 @@ function ContextBoard({children}){
 
     setGroupList(updatedGroupList)
 
-    //* fetcher.groupUPDATE(targetGroup)
-    //todo: UPDATE Group TO DATA BASE
+    try { //todo: [DONE]
+      await groupFetcher.UPDATE(ownerGroup_id,targetGroup)
+    } catch (err) {console.log()}
   }
 
   const createNewGroup = async (tittle)=>{ //-------------------------------------- [CREATE] create new group
     try {
-      const response = await groupFetcher.CREATE(activeBoardId,tittle)
+      const response = await groupFetcher.CREATE(activeBoardId,tittle) //todo: [DONE]
       
       //1) construct groupObject using tittle and obtainer group_id
       const newGroup = {group_id:response.data.group_id,tittle,ownerBoard_id:activeBoardId,tasks:[]}
@@ -117,7 +120,7 @@ function ContextBoard({children}){
     } catch (err) {console.log(err)}
   }
 
-  const checkTask = (task_id,ownerGroup_id)=>{ //---------------------- [CHECK] update task to be checked/unchecked
+  const checkTask = async (task_id,ownerGroup_id)=>{ //---------------------- [CHECK] update task to be checked/unchecked
     //1)get owner group
     const ownerGroup = groupList.find(group => group.group_id === ownerGroup_id )
 
@@ -141,8 +144,9 @@ function ContextBoard({children}){
 
     setGroupList(updatedGroupList)
 
-    //* fetcher.groupUPDATE(ownerGroup)
-    //todo: UPDATE Group TO DATA BASE
+    try { //todo: [DONE]
+      await groupFetcher.UPDATE(ownerGroup_id,ownerGroup)
+    } catch (err) {console.log()}
   }
 
   const findStaredTasks = ()=>{ //---------------------------------------- [FIND] find the stared tasks to render
@@ -152,7 +156,7 @@ function ContextBoard({children}){
     }
   }
 
-  const starTask = (task_id,ownerGroup_id)=>{ //------------------------------------------------- [STAR] switch the isStared property of a task
+  const starTask = async (task_id,ownerGroup_id)=>{ //------------------------------------------------- [STAR] switch the isStared property of a task
     //1)get owner group
     const ownerGroup = groupList.find(group => group.group_id === ownerGroup_id )
 
@@ -176,11 +180,12 @@ function ContextBoard({children}){
 
     setGroupList(updatedGroupList)
 
-    //* fetcher.groupUPDATE(ownerGroup)
-    //todo: UPDATE Group TO DATA BASE
+    try { //todo: [DONE]
+      await groupFetcher.UPDATE(ownerGroup_id,ownerGroup)
+    } catch (err) {console.log()}
   }
 
-  const starActiveTask = ()=>{ //------------------------------------------------- [STAR] star/unstar the active task
+  const starActiveTask = async ()=>{ //------------------------------------------------- [STAR] star/unstar the active task
     //1)get owner group of activeCard
     const ownerGroup = groupList.find(group => group.group_id === activeCard.ownerGroup_id )
 
@@ -204,22 +209,25 @@ function ContextBoard({children}){
 
     setGroupList(updatedGroupList)
 
-    //* fetcher.groupUPDATE(ownerGroup)
-    //todo: UPDATE Group TO DATA BASE
+    try { //todo: [DONE]
+      await groupFetcher.UPDATE(ownerGroup.group_id,ownerGroup)
+    } catch (err) {console.log()}
   }
 
-  const deleteGroup = (group_id) => { //------------------------------------------------- [DELETE] delete a group from groupList
+  const deleteGroup = async (group_id) => { //------------------------------------------------- [DELETE] delete a group from groupList
     //1) filter groupList
     let updatedGroupList = groupList.filter(group=>group.group_id !== group_id)
 
     //2)set state and upload to DB
     setGroupList(updatedGroupList)
 
-    //* fetcher.groupDELETE(group_id)
-    //todo: UPDATE group to DB
+
+    try {
+      await groupFetcher.DELETE(group_id) //todo: DONE
+    } catch (error) {console.log(err)} 
   }
 
-  const editGroup = (group_id,newTittle)=>{ //------------------------------------------------- [UPDATE] change group's name
+  const editGroup = async (group_id,newTittle)=>{ //------------------------------------------------- [UPDATE] change group's name
     //1) find group object
     const updatedGroup = groupList.find(group => group.group_id === group_id )
 
@@ -237,11 +245,12 @@ function ContextBoard({children}){
 
     setGroupList(updatedGroupList)
 
-    //* fetcher.groupUPDATE(updatedGroup)
-    //todo: UPDATE Group TO DATA BASE
+    try { //todo: [DONE]
+      await groupFetcher.UPDATE(group_id,updatedGroup)
+    } catch (err) {console.log()}
   }
 
-  const editTask = (task_id,ownerGroup_id,newTittle,newDescription) =>{  //------------------------------------ [UPDATE] edit a task tittle and/or description
+  const editTask = async (task_id,ownerGroup_id,newTittle,newDescription) =>{  //------------------------------------ [UPDATE] edit a task tittle and/or description
     //1)find the ownerGroup
     const ownerGroup = groupList.find(group => group.group_id === ownerGroup_id )
 
@@ -266,12 +275,13 @@ function ContextBoard({children}){
     //4)set state and upload to DB
     setGroupList(updatedGroupList)
 
-    //* fetcher.groupUPDATE(ownerGroup)
-    //todo: UPDATE Group TO DATA BASE
+    try { //todo: [DONE]
+      await groupFetcher.UPDATE(ownerGroup_id,ownerGroup)
+    } catch (err) {console.log()}
   }
 
 
-  const createNewBoard = (tittle)=>{ //----------------------------------------------- [CREATE] create new Board
+  const createNewBoard = async (tittle)=>{ //----------------------------------------------- [CREATE] create new Board
     //! do not add an id when connected to db
     //1) construct boardObject AND generate group_id
     const newBoard = {board_id:( 'B'+Date.now().toString() ),tittle}
@@ -281,8 +291,8 @@ function ContextBoard({children}){
     setBoardList(newBoardList)
 
 
-    try {boardFetcher.CREATE(tittle)} catch (err) {console.log(err)}
-    //todo: ADD Board TO DATA BASE
+    try {await boardFetcher.CREATE(tittle)}
+    catch (err) {console.log(err)} //todo: DONE
   }
 
 
