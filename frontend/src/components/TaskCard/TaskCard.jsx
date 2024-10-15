@@ -101,7 +101,7 @@ function TaskCard({taskObject}){ // --------------------------------------------
 
         <li className={`taskCard ${isDone?"doneTask":""}`} draggable onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
 
-          <div className={`taskCard-head`}>
+          <div className='taskCard-head'>
             <div className='taskCard-icons'>
               <GoGrabber size={30}/>
               <button onClick={handleCheckButton}>

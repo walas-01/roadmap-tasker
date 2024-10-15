@@ -13,6 +13,7 @@ function ContextBoard({children}){
   
   const [activeCard,setActiveCard] = useState(null)
   const [activeBoardId,setActiveBoardId] = useState(null)
+  const [activeBoardTittle,setActiveBoardTittle] = useState(null)
   const [activeUser,setActiveUser] = useState(null)
   // * -----------------
 
@@ -295,6 +296,19 @@ function ContextBoard({children}){
     catch (err) {console.log(err)} //todo: DONE
   }
 
+  const deleteActiveBoard = async ()=>{ //----------------------------------------------- [DELETE] deletes the active board (from activeBoardId state)
+    //1) filter boardList
+    let updatedBoardList = boardList.filter(board=>board.board_id !== activeBoardId)
+
+    //2)set state and 
+    setBoardList(updatedBoardList)
+
+
+    try { //todo: [DONE]
+      boardFetcher.DELETE(activeBoardId)
+    } catch (err) {console.log()}
+  }
+
 
   return (
     <GlobalContext.Provider 
@@ -304,6 +318,7 @@ function ContextBoard({children}){
                 activeCard,setActiveCard,
                 todoTasks,setTodoTasks,
                 activeBoardId,setActiveBoardId,
+                activeBoardTittle,setActiveBoardTittle,
                 activeUser,setActiveUser,
                 moveTask,
                 removeTask, deleteGroup,
@@ -312,7 +327,8 @@ function ContextBoard({children}){
                 findStaredTasks,
                 starTask,starActiveTask,
                 editGroup,editTask,
-                createNewBoard
+                createNewBoard,
+                deleteActiveBoard
              }}>
       {children}
     </GlobalContext.Provider>

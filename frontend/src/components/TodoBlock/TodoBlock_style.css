@@ -88,7 +88,7 @@
 }
 
 
-/*------------------------------------- staredTaskCard */
+/*------------------------------------- dropArea */
 
 .todoBlock-dropArea{
   color: var(--backcolor-black);
@@ -108,7 +108,7 @@
       black 5px,
       var(--color-green1) 5px,
       black 10px
-      );
+  );
 }
 
 

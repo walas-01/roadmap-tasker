@@ -3,14 +3,15 @@ import { GlobalContext } from '../../pages/BoardPage/Context/BoardContext.jsx'
 import './Board_style.css'
 
 import { FaPlus } from "react-icons/fa"
+import roadImg from '../../imgs/roadIcon2.png'
 
 import GroupCard from '../GroupCard/GroupCard.jsx'
 import CreateGroup from '../GroupCard/CreateGroup/CreateGroup.jsx'
-import { CreateBoardPopup } from '../Popup/Popup.jsx'
+import { CreateBoardPopup, Popup } from '../Popup/Popup.jsx'
 
 
 function BoardNavigator(){ // --------------------------------------- [ BoardNavigator ] -
-  const {boardList,setActiveBoardId,createNewBoard} = useContext(GlobalContext)
+  const {boardList,setActiveBoardId,createNewBoard,setActiveBoardTittle} = useContext(GlobalContext)
   const [currentTab,setCurrentTab] = useState(0)
   const [isCreatingBoard,setIsCreatingBoard] = useState(false)
   const [boardTittle,setBoardLittle] = useState('')
@@ -18,6 +19,7 @@ function BoardNavigator(){ // --------------------------------------- [ BoardNav
   useEffect(()=>{
     if(boardList.length !== 0){
       setActiveBoardId(boardList[0].board_id)
+      setActiveBoardTittle(boardList[0].tittle)
     }
   },[boardList])
 
@@ -51,6 +53,7 @@ function BoardNavigator(){ // --------------------------------------- [ BoardNav
   const handleNavClick = (index)=>{
     setCurrentTab(index)
     setActiveBoardId(boardList[index].board_id)
+    setActiveBoardTittle(boardList[index].tittle)
   }
 
   const handleCreateClick = ()=>{
@@ -82,8 +85,10 @@ function BoardNavigator(){ // --------------------------------------- [ BoardNav
 
 
 function Board(){
-  const {groupList,activeBoardId} = useContext(GlobalContext)
+  const {groupList,activeBoardId,deleteActiveBoard,activeBoardTittle} = useContext(GlobalContext)
   const [myGroupList,setMyGroupList] = useState([])
+
+  const [isDeletingBoard,setIsDeletingBoard] = useState(false)
 
   useEffect(()=>{
     // filters the groupList to have an ownerBoard_id
@@ -91,17 +96,29 @@ function Board(){
     setMyGroupList( groupList.filter(group=>group.ownerBoard_id === activeBoardId) )
   },[activeBoardId,groupList])
 
+  const handleDeleteBoard = ()=>{
+    setIsDeletingBoard(!isDeletingBoard)
+  }
+
   return (
     <>
+      <div className="boardMsg">
+        <img src={roadImg} alt="road icon" />
+        <div className="boardMsg-text">
+          <h3>{activeBoardTittle}</h3>
+          <button onClick={handleDeleteBoard} >Delete Board</button>
+        </div>
+      </div>
 
-      <h1>Que honda!</h1>
-
-      {myGroupList.map((group)=>{ return <GroupCard key={group.group_id} groupObject={group}/>   })}
-
+      {myGroupList.map((group) => {
+        return <GroupCard key={group.group_id} groupObject={group} />;
+      })}
 
       <CreateGroup />
+
+      {isDeletingBoard? <Popup btn1='Cancel'btn2='Delete' tittle='Delete Board' text='Deleting a Board can not be undone' func={deleteActiveBoard} controlState={setIsDeletingBoard} /> : ''}
     </>
   );
-}
+} 
 
 export {BoardNavigator,Board}
