@@ -1,4 +1,6 @@
 import Board from '../models/board_model.js'
+import Group from '../models/group_model.js'
+
 import asyncWrap from '../middlewares/async-wrap.js'
 
 const boardController = {}
@@ -28,6 +30,21 @@ boardController.createBoard =  asyncWrap(async(req,res,next)=>{ // -------------
   await Board.create(newBoard)
 
   res.status(201).send(newBoard)
+})
+
+
+boardController.deleteBoard = asyncWrap(async (req,res,next)=>{ // ---------------------------- [DELETE] -
+  console.log('>[Board]: DELETE')
+
+  const {board_id} = req.body
+
+
+  await Board.deleteOne({board_id})
+
+  await Group.deleteMany({ownerBoard_id:board_id})
+
+
+  res.status(204).send({message:'group deleted'})
 })
 
 

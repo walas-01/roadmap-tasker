@@ -4,10 +4,10 @@ const boardRouter = express.Router()
 import authMiddleware from '../middlewares/auth-middleware.js'
 import boardController from '../controllers/board_controller.js'
 
-// GET /api/board
-boardRouter.route('/board').get(authMiddleware, boardController.getBoards)
-// POST /api/board
-boardRouter.route('/board').post(authMiddleware, boardController.createBoard)
 
+boardRouter.route('/board')
+  .get(authMiddleware, boardController.getBoards) // GET /api/board
+  .post(authMiddleware, boardController.createBoard) // POST /api/board
+  .delete(authMiddleware, boardController.deleteBoard) // DELETE /api/board
 
 export default boardRouter
