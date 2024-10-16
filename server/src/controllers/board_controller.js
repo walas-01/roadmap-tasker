@@ -29,7 +29,7 @@ boardController.createBoard =  asyncWrap(async(req,res,next)=>{ // -------------
 
   await Board.create(newBoard)
 
-  res.status(201).send(newBoard)
+  res.status(201).send( {board_id:newBoard.board_id} )
 })
 
 

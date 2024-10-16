@@ -13,8 +13,10 @@ import Todo from '../../components/TodoBlock/TodoBlock.jsx'
 import DeleteArea from '../../components/DeleteArea/DeleteArea.jsx'
 import {Board,BoardNavigator} from '../../components/Board/Board.jsx'
 import {WelcomeMsg} from '../../components/Popup/Popup.jsx'
+import userFetcher from '../../axios/userMethods.js'
 
 import sketchImg from '../../imgs/sketch1.png'
+import { RiLogoutCircleLine } from "react-icons/ri"
 
 // ----------------------------------------------------------------------------- mackup data
 const des = 'lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s'
@@ -51,7 +53,6 @@ function BoardPage(){ // -------------------------------------------------------
 
     const start = async()=>{
       try {
-        console.log('[getting groups and boards. . .]')
         const boardRes = await boardFetcher.GET()
         const groupRes = await groupFetcher.GET()
 
@@ -99,11 +100,24 @@ function BoardPage(){ // -------------------------------------------------------
 }
 
 function RoadMapTasker(){
-  //todo: this component must show the username and a logout button 
+  const navigator = useNavigate()
+
+  const handleLogOut = async ()=>{
+    try {
+      await userFetcher.logout()
+      navigator('/login')
+    } catch (err) {console.log(err)}
+  }
+
+
   return(
     <div className='roadMapTasker'>
-      <h1>RoadMap Tasker</h1>
-      <div></div>
+      <div className='roadMapTasker-head'>
+        <h1>RoadMap Tasker</h1>
+      </div>
+      <div className='roadMapTasker-body'>
+        <button onClick={handleLogOut}><RiLogoutCircleLine size={20} />Log Out</button>
+      </div>
     </div>
   )
 }
@@ -112,7 +126,7 @@ function NotLoggedInCard(){
   const navigator = useNavigate()
 
   const handleOnClick = ()=>{
-    navigator('/')
+    navigator('/login')
   }
 
   return(

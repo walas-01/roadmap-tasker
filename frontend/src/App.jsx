@@ -11,12 +11,12 @@ import NotFoundPage from './pages/NotFoundPage/NotFoundPage.jsx'
 //---- Router
 const router = createBrowserRouter([
   {
-    path:'/board',
+    path:'/',
     element:<BoardPage/>,
     errorElement:<NotFoundPage/>
   },
   {
-    path:'/',
+    path:'/login',
     element:<LoginPage/>,
     errorElement:<NotFoundPage/>
   }

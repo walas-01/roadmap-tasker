@@ -23,12 +23,16 @@
   top: 20px;;
 }
 
+/*-----------------------------------------------RoadMapTasker Card*/
+
 .roadMapTasker{
   width: 100%;
   min-width: 215px;
   margin: 2rem 0;
   z-index: 11;
-  
+
+}
+.roadMapTasker-head{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -38,13 +42,53 @@
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
 }
-
 .roadMapTasker h1{
   white-space: nowrap;
   overflow: hidden;
   padding: 10px;
   font-size: 1.5rem;
 }
+
+
+.roadMapTasker-body{
+  padding: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+
+  background-color: var(--color-purple2);
+
+  border-bottom: 10px solid var(--color1);
+  border-radius: 8px;
+}
+
+.roadMapTasker-body button{
+  width: 90%;
+  padding: 0.2rem 1.2rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+
+  background: none;
+  border: 2px solid var(--color1);
+  color: var(--color1);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.roadMapTasker-body button:hover{
+  background: none;
+  border: 2px solid white;
+  color: var(--backcolor-black);
+  font-weight: bold;
+  background-color: white;
+  transition: 0.1s;
+  scale: 1.02;
+}
+
 
 /*----------------------------------------------- NOT LOGGED IN CARD*/
 

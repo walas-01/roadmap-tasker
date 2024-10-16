@@ -73,4 +73,10 @@ userController.login = asyncWrap(async(req,res,next)=>{ // ---------------------
   }).status(200).send({message:'User logged in. Session started.'})
 })
 
+
+userController.logout = asyncWrap( (req,res,next)=>{
+  res.clearCookie('access_token', { httpOnly: true, secure: true, sameSite: 'strict' });
+  res.status(200).json({ message: 'session ended' });
+})
+
 export default userController

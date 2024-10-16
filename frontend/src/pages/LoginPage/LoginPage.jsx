@@ -16,7 +16,6 @@ function LoginPage(){ //------------------------------------------------------- 
     const getU = async()=>{
       try {
         const res = await userFetcher.getAllUsers()
-        console.log(res.data)
       } catch (err) {console.log(err)}
     }
 
@@ -128,7 +127,7 @@ function LoginForm(){ //------------------------------------- [ LOGIN ] -
 
 
       setError('Ok!')
-      navigator('/board')
+      navigator('/')
     } catch (err) {
       console.log(err.response)
       if(err.response && err.response.data.message){setError(err.response.data.message)}

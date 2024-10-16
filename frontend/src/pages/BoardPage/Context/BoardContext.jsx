@@ -18,10 +18,10 @@ function ContextBoard({children}){
   // * -----------------
 
   useEffect(()=>{
-    console.log("--[GroupList]:")
-    console.log(groupList)
-    console.log("--[BoardList]:")
-    console.log(boardList)
+    // console.log("--[GroupList]:")
+    // console.log(groupList)
+    // console.log("--[BoardList]:")
+    // console.log(boardList)
 
     findStaredTasks()
   },[groupList,boardList])
@@ -283,17 +283,18 @@ function ContextBoard({children}){
 
 
   const createNewBoard = async (tittle)=>{ //----------------------------------------------- [CREATE] create new Board
-    //! do not add an id when connected to db
-    //1) construct boardObject AND generate group_id
-    const newBoard = {board_id:( 'B'+Date.now().toString() ),tittle}
+    //1) construct boardObject 
+    try {//todo: DONE
+      const response = await boardFetcher.CREATE(tittle)
 
-    //2) add to boardList AND  updat state
-    const newBoardList = [...boardList,newBoard]
-    setBoardList(newBoardList)
+      const newBoard = {board_id:response.data.board_id,tittle}
 
+      //2) add to boardList AND  updat state
+      const newBoardList = [...boardList,newBoard]
+      setBoardList(newBoardList)
 
-    try {await boardFetcher.CREATE(tittle)}
-    catch (err) {console.log(err)} //todo: DONE
+    }catch (err) {console.log(err)} 
+
   }
 
   const deleteActiveBoard = async ()=>{ //----------------------------------------------- [DELETE] deletes the active board (from activeBoardId state)

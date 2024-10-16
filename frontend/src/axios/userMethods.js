@@ -36,7 +36,7 @@ userFetcher.register = async(username,email,password)=>{ //----------- [ registe
 
 
 
-userFetcher.login = async(email,password)=>{ //-------------- [ login ] -
+userFetcher.login = async(email,password)=>{ //-------------- [ log in ] -
   let loginConfig = {
     method: 'post',
     maxBodyLength: Infinity,
@@ -50,6 +50,25 @@ userFetcher.login = async(email,password)=>{ //-------------- [ login ] -
 
   try {
     const data = await axios.request(loginConfig)
+    return data
+  } catch (err) {
+    throw err
+  }
+}
+
+userFetcher.logout = async()=>{ //-------------- [ log out ] -
+  let logoutConfig = {
+    method: 'post',
+    maxBodyLength: Infinity,
+    withCredentials:true,
+    url: 'http://localhost:4001/api/logout',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+  try {
+    const data = await axios.request(logoutConfig)
     return data
   } catch (err) {
     throw err
