@@ -93,9 +93,11 @@ function SignInForm(){ //------------------------------------- [ SIGN IN ] -
         <FaLock size={30} className='input-icon'/><input type="password" placeholder='Password' onChange={(e)=>{setRegisterObject({...registerObject, password:e.target.value })}}/>
       </div>
 
-      <div>
-        <p>{error}</p>
-      </div>
+      { error.length > 1 ?
+          <div className={`panel-errorArea ${error === 'Successfully registered!' ? 'errorArea-active' : ''}`} >
+            <p>{error}</p>
+          </div> :''
+        }
 
       <div className='panel-form-button-container'>
         <button type='submit'>Sign Up</button>
@@ -125,7 +127,7 @@ function LoginForm(){ //------------------------------------- [ LOGIN ] -
       console.log(response.data)
 
 
-      setError('Okey!')
+      setError('Ok!')
       navigator('/board')
     } catch (err) {
       console.log(err.response)
@@ -136,7 +138,7 @@ function LoginForm(){ //------------------------------------- [ LOGIN ] -
   return (
     <form className="panel-form loginForm" onSubmit={handleSubmit}>
       <div className="panel-form-head">
-        <h3>Login</h3>
+        <h3>Log In</h3>
         <img src={icon2} alt="sign in icon" />
       </div>
 
@@ -149,12 +151,15 @@ function LoginForm(){ //------------------------------------- [ LOGIN ] -
           <FaLock size={30} className="input-icon" /><input type="password" placeholder="Password" onChange={(e)=>{setLoginObject({...loginObject,password:e.target.value})}} />
         </div>
 
-        <div>
-          <p>{error}</p>
-        </div>
+        { error.length > 1 ?
+          <div className={`panel-errorArea ${error === 'Ok!' ? 'errorArea-active' : ''}`} >
+            <p>{error}</p>
+          </div> :''
+        }
+
 
         <div className="panel-form-button-container">
-          <button type='submit'>Login</button>
+          <button type='submit'>Log In</button>
         </div>
       </div>
     </form>

@@ -152,7 +152,6 @@
 
 /*------------------------------------- button */
 
-
 .panel-form-button-container{
   width: 100%;
   display: flex;
@@ -196,4 +195,45 @@
   color: var(--backcolor-black);
 }
 
+/*------------------------------------- error area */
 
+.panel-errorArea{
+  color: var(--backcolor-black);
+  height: 3rem;
+  width: 90%;
+  margin-bottom: 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: bold;
+  border-radius: 5px;
+  background: repeating-linear-gradient(
+      -55deg,
+      var(--color-red1),
+      black 5px,
+      var(--color-red1) 5px,
+      black 10px
+  );
+}
+
+.errorArea-active{
+  background: repeating-linear-gradient(
+      -55deg,
+      var(--color-green1),
+      black 5px,
+      var(--color-green1) 5px,
+      black 10px
+  );
+}
+
+
+.panel-errorArea p{
+  padding: 3px 5px;
+  background-color: var(--color-red1);
+}
+
+.errorArea-active p{
+  background-color: var(--color-green1);
+}

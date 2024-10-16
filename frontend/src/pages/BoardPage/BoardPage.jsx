@@ -1,4 +1,5 @@
 import { useContext, useEffect} from 'react'
+import {useNavigate} from 'react-router-dom'
 import React from 'react'
 
 import { GlobalContext } from './Context/BoardContext.jsx'
@@ -12,6 +13,8 @@ import Todo from '../../components/TodoBlock/TodoBlock.jsx'
 import DeleteArea from '../../components/DeleteArea/DeleteArea.jsx'
 import {Board,BoardNavigator} from '../../components/Board/Board.jsx'
 import {WelcomeMsg} from '../../components/Popup/Popup.jsx'
+
+import sketchImg from '../../imgs/sketch1.png'
 
 // ----------------------------------------------------------------------------- mackup data
 const des = 'lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s'
@@ -88,7 +91,7 @@ function BoardPage(){ // -------------------------------------------------------
             }
           </main>
         </> :
-        NotLoggedInCard()
+        <NotLoggedInCard/>
       }
 
     </section>
@@ -100,21 +103,33 @@ function RoadMapTasker(){
   return(
     <div className='roadMapTasker'>
       <h1>RoadMap Tasker</h1>
+      <div></div>
     </div>
   )
 }
 
 function NotLoggedInCard(){
-  return(
-    <div className='notLoggedIn'>
-      <div className='notLoggedIn-head'>
-        <h2>Welcome to RoadMapTasker!</h2>
-      </div>
+  const navigator = useNavigate()
 
-      <div className='notLoggedIn-body'>
-        <p>Looks like you are not logged in. Register to start managing your tasks.</p>
+  const handleOnClick = ()=>{
+    navigator('/')
+  }
+
+  return(
+    <>
+      <div className='notLoggedIn'>
+        <div className='notLoggedIn-head'>
+          <h2>Welcome to RoadMapTasker!</h2>
+        </div>
+
+        <div className='notLoggedIn-body'>
+          <p>Looks like you are not logged in. Sign in to start managing your tasks!</p>
+          <button onClick={handleOnClick}>Sign in / Log In</button>
+          <img src={sketchImg} alt="website sketch" />
+        </div>
       </div>
-    </div>
+    
+    </>
   )
 }
 
