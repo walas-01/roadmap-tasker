@@ -6,7 +6,7 @@ import boardFetcher from "../../../axios/boardMethods.js"
 import groupFetcher from "../../../axios/groupMethods.js"
 
 function ContextBoard({children}){
-  // * -------------------------------------------------- main States, used across the board page
+  // * -------------------------------------------------- main States, used across the app
   const [groupList,setGroupList] = useState([])
   const [boardList,setBoardList] = useState([])
   const [todoTasks,setTodoTasks] = useState([])
@@ -18,10 +18,10 @@ function ContextBoard({children}){
   // * -----------------
 
   useEffect(()=>{
-    // console.log("--[GroupList]:")
-    // console.log(groupList)
-    // console.log("--[BoardList]:")
-    // console.log(boardList)
+    console.log("--[GroupList]:")
+    console.log(groupList)
+    console.log("--[BoardList]:")
+    console.log(boardList)
 
     findStaredTasks()
   },[groupList,boardList])
@@ -44,7 +44,7 @@ function ContextBoard({children}){
     
     setGroupList(updatedGroupList)
 
-    try { //todo: [DONE]
+    try {
       await groupFetcher.UPDATE(originalGroup.group_id,originalGroup)
     } catch (err) {console.log()}
   }
@@ -75,7 +75,7 @@ function ContextBoard({children}){
     setGroupList(updatedGroupList)
 
 
-    try { //todo: [DONE]
+    try {
       await groupFetcher.UPDATE(groupTargetId,targetGroup)
     } catch (err) {console.log()}
   }
@@ -101,14 +101,14 @@ function ContextBoard({children}){
 
     setGroupList(updatedGroupList)
 
-    try { //todo: [DONE]
+    try {
       await groupFetcher.UPDATE(ownerGroup_id,targetGroup)
     } catch (err) {console.log()}
   }
 
   const createNewGroup = async (tittle)=>{ //-------------------------------------- [CREATE] create new group
     try {
-      const response = await groupFetcher.CREATE(activeBoardId,tittle) //todo: [DONE]
+      const response = await groupFetcher.CREATE(activeBoardId,tittle)
       
       //1) construct groupObject using tittle and obtainer group_id
       const newGroup = {group_id:response.data.group_id,tittle,ownerBoard_id:activeBoardId,tasks:[]}
@@ -145,7 +145,7 @@ function ContextBoard({children}){
 
     setGroupList(updatedGroupList)
 
-    try { //todo: [DONE]
+    try {
       await groupFetcher.UPDATE(ownerGroup_id,ownerGroup)
     } catch (err) {console.log()}
   }
@@ -154,7 +154,7 @@ function ContextBoard({children}){
     if(groupList.length > 0){
       const staredTasks = groupList.flatMap(group => group.tasks).filter(task => task.isStared)
       setTodoTasks(staredTasks)
-    }
+    }else{setTodoTasks([])}
   }
 
   const starTask = async (task_id,ownerGroup_id)=>{ //------------------------------------------------- [STAR] switch the isStared property of a task
@@ -181,7 +181,7 @@ function ContextBoard({children}){
 
     setGroupList(updatedGroupList)
 
-    try { //todo: [DONE]
+    try {
       await groupFetcher.UPDATE(ownerGroup_id,ownerGroup)
     } catch (err) {console.log()}
   }
@@ -210,7 +210,7 @@ function ContextBoard({children}){
 
     setGroupList(updatedGroupList)
 
-    try { //todo: [DONE]
+    try {
       await groupFetcher.UPDATE(ownerGroup.group_id,ownerGroup)
     } catch (err) {console.log()}
   }
@@ -221,10 +221,10 @@ function ContextBoard({children}){
 
     //2)set state and upload to DB
     setGroupList(updatedGroupList)
-
+    findStaredTasks()
 
     try {
-      await groupFetcher.DELETE(group_id) //todo: DONE
+      await groupFetcher.DELETE(group_id)
     } catch (error) {console.log(err)} 
   }
 
@@ -246,7 +246,7 @@ function ContextBoard({children}){
 
     setGroupList(updatedGroupList)
 
-    try { //todo: [DONE]
+    try {
       await groupFetcher.UPDATE(group_id,updatedGroup)
     } catch (err) {console.log()}
   }
@@ -276,7 +276,7 @@ function ContextBoard({children}){
     //4)set state and upload to DB
     setGroupList(updatedGroupList)
 
-    try { //todo: [DONE]
+    try {
       await groupFetcher.UPDATE(ownerGroup_id,ownerGroup)
     } catch (err) {console.log()}
   }
@@ -284,7 +284,7 @@ function ContextBoard({children}){
 
   const createNewBoard = async (tittle)=>{ //----------------------------------------------- [CREATE] create new Board
     //1) construct boardObject 
-    try {//todo: DONE
+    try {
       const response = await boardFetcher.CREATE(tittle)
 
       const newBoard = {board_id:response.data.board_id,tittle}
@@ -301,11 +301,17 @@ function ContextBoard({children}){
     //1) filter boardList
     let updatedBoardList = boardList.filter(board=>board.board_id !== activeBoardId)
 
-    //2)set state and 
+    //2) filter groupList as well
+    let updatedGroupList = groupList.filter(group=>group.ownerBoard_id !== activeBoardId)
+
+    //3)update BoardList and GroupList state 
     setBoardList(updatedBoardList)
+    setGroupList(updatedGroupList)
 
+    //4) also update stared tasks
+    findStaredTasks()
 
-    try { //todo: [DONE]
+    try {
       boardFetcher.DELETE(activeBoardId)
     } catch (err) {console.log()}
   }

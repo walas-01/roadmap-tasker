@@ -5,3 +5,9 @@ list of packeges used here in the server side
 > mongoose
 > dotenv
 
+> corse
+> helmet
+
+> bcrypt
+> jsonwebtoken
+> cookie-parser
