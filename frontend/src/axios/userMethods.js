@@ -8,7 +8,7 @@ userFetcher.getAllUsers = async()=>{
   let getUsersCFG = {
     method: 'get',
     maxBodyLength: Infinity,
-    url: 'http://localhost:4001/api/users',
+    url: (import.meta.env.VITE_SERVER_URL,'/api/users'),
   }
   try {
     const data = await axios.request(getUsersCFG)
@@ -21,7 +21,7 @@ userFetcher.register = async(username,email,password)=>{ //----------- [ registe
   let registerConfig = {
     method: 'post',
     maxBodyLength: Infinity,
-    url: 'http://localhost:4001/api/register',
+    url: (import.meta.env.VITE_SERVER_URL,'/api/register'),
     headers: {
       'Content-Type': 'application/json'
     },
@@ -41,7 +41,7 @@ userFetcher.login = async(email,password)=>{ //-------------- [ log in ] -
     method: 'post',
     maxBodyLength: Infinity,
     withCredentials:true,
-    url: 'http://localhost:4001/api/login',
+    url: (import.meta.env.VITE_SERVER_URL,'/api/login'),
     headers: {
       'Content-Type': 'application/json'
     },
@@ -61,7 +61,7 @@ userFetcher.logout = async()=>{ //-------------- [ log out ] -
     method: 'post',
     maxBodyLength: Infinity,
     withCredentials:true,
-    url: 'http://localhost:4001/api/logout',
+    url: (import.meta.env.VITE_SERVER_URL,'/api/logout'),
     headers: {
       'Content-Type': 'application/json'
     }
