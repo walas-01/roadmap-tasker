@@ -20,7 +20,7 @@ import groupRouter from './routers/group_router.js'
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
-  origin: ['http://localhost:5173', process.env.FRONTEND_URL],
+  origin: ['http://localhost:5173', process.env.FRONTEND_URL,'https://roadmaptasker-client.onrender.com'],
   credentials:true,
   methods:'GET,POST,PUT,DELETE',
   allowedHeaders:['Content-Type','Authorization']
