@@ -29,6 +29,7 @@ app.use(helmet())
 
 
 // ------ routers
+app.get('/api/check',(req,res)=>{res.status(200).send({message:'okey'})})
 app.use('/api',userRouter)
 app.use('/api',boardRouter)
 app.use('/api',groupRouter)
