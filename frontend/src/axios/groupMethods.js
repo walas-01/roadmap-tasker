@@ -6,7 +6,7 @@ groupFetcher.GET = async()=>{ //---------------------------------- [ get groups 
   let config = {
     method: 'get',
     maxBodyLength: Infinity,
-    url: (import.meta.env.VITE_SERVER_URL,'/api/group'),
+    url: 'https://roadmaptasker-server.onrender.com/api/group',
     withCredentials:true,
     headers: {
       'Content-Type': 'application/json'
@@ -25,7 +25,7 @@ groupFetcher.CREATE = async(ownerBoard_id,tittle)=>{ //--------------------- [ c
   let config = {
     method: 'post',
     maxBodyLength: Infinity,
-    url: (import.meta.env.VITE_SERVER_URL,'/api/group'),
+    url: 'https://roadmaptasker-server.onrender.com/api/group',
     withCredentials: true,
     headers: {
       'Content-Type': 'application/json'
@@ -45,7 +45,7 @@ groupFetcher.DELETE = async (group_id)=>{ //--------------------- [ remove group
   let config = {
     method: 'delete',
     maxBodyLength: Infinity,
-    url: (import.meta.env.VITE_SERVER_URL,'/api/group'),
+    url: 'https://roadmaptasker-server.onrender.com/api/group',
     withCredentials: true,
     headers: {
       'Content-Type': 'application/json'
@@ -65,7 +65,7 @@ groupFetcher.UPDATE = async (group_id,groupObject)=>{ //--------------------- [ 
   let config = {
     method: 'put',
     maxBodyLength: Infinity,
-    url: (import.meta.env.VITE_SERVER_URL,'/api/group'),
+    url: 'https://roadmaptasker-server.onrender.com/api/group',
     withCredentials: true,
     headers: {
       'Content-Type': 'application/json'

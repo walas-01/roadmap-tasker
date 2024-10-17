@@ -6,7 +6,7 @@ userFetcher.register = async(username,email,password)=>{ //----------- [ registe
   let registerConfig = {
     method: 'post',
     maxBodyLength: Infinity,
-    url: (import.meta.env.VITE_SERVER_URL,'/api/register'),
+    url: 'https://roadmaptasker-server.onrender.com/api/register',
     headers: {
       'Content-Type': 'application/json'
     },
@@ -26,7 +26,7 @@ userFetcher.login = async(email,password)=>{ //-------------- [ log in ] -
     method: 'post',
     maxBodyLength: Infinity,
     withCredentials:true,
-    url: (import.meta.env.VITE_SERVER_URL,'/api/login'),
+    url: 'https://roadmaptasker-server.onrender.com/api/login',
     headers: {
       'Content-Type': 'application/json'
     },
@@ -46,7 +46,7 @@ userFetcher.logout = async()=>{ //-------------- [ log out ] -
     method: 'post',
     maxBodyLength: Infinity,
     withCredentials:true,
-    url: (import.meta.env.VITE_SERVER_URL,'/api/logout'),
+    url: 'https://roadmaptasker-server.onrender.com/api/logout',
     headers: {
       'Content-Type': 'application/json'
     }

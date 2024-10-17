@@ -7,7 +7,7 @@ boardFetcher.GET = async()=>{ //---------------------------------- [ get boards 
     method: 'get',
     maxBodyLength: Infinity,
     withCredentials:true,
-    url: (import.meta.env.VITE_SERVER_URL,'/api/board'),
+    url: 'https://roadmaptasker-server.onrender.com/api/board',
     headers: {
       'Content-Type': 'application/json'
     }
@@ -27,7 +27,7 @@ boardFetcher.CREATE = async(tittle)=>{ //--------------------- [ create board ] 
     method: 'post',
     maxBodyLength: Infinity,
     withCredentials: true,
-    url: (import.meta.env.VITE_SERVER_URL,'/api/board'),
+    url: 'https://roadmaptasker-server.onrender.com/api/board',
     headers: {
       'Content-Type': 'application/json'
     },
@@ -48,7 +48,7 @@ boardFetcher.DELETE = async(board_id)=>{ //--------------------- [ delete a boar
     method: 'delete',
     maxBodyLength: Infinity,
     withCredentials: true,
-    url: (import.meta.env.VITE_SERVER_URL,'/api/board'),
+    url: 'https://roadmaptasker-server.onrender.com/api/board',
     headers: {
       'Content-Type': 'application/json'
     },
