@@ -3,7 +3,7 @@
   margin: 10px auto;
 
   display: flex;
-  justify-content: end;
+  justify-content: center;
 }
 
 .board{
@@ -18,17 +18,21 @@
 }
 
 .innerSideBar{
-  width: 15%;
-  position: fixed;
-  top: 0;
-  left: 5%;
+  width: 85%;
+  position: sticky;
+  top: 20px;;
 }
 
+/*-----------------------------------------------RoadMapTasker Card*/
+
 .roadMapTasker{
+  width: 100%;
   min-width: 215px;
   margin: 2rem 0;
   z-index: 11;
-  
+
+}
+.roadMapTasker-head{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -38,7 +42,6 @@
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
 }
-
 .roadMapTasker h1{
   white-space: nowrap;
   overflow: hidden;
@@ -46,3 +49,107 @@
   font-size: 1.5rem;
 }
 
+
+.roadMapTasker-body{
+  padding: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+
+  background-color: var(--color-purple2);
+
+  border-bottom: 10px solid var(--color1);
+  border-radius: 8px;
+}
+
+.roadMapTasker-body button{
+  width: 90%;
+  padding: 0.2rem 1.2rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+
+  background: none;
+  border: 2px solid var(--color1);
+  color: var(--color1);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.roadMapTasker-body button:hover{
+  background: none;
+  border: 2px solid white;
+  color: var(--backcolor-black);
+  font-weight: bold;
+  background-color: white;
+  transition: 0.1s;
+  scale: 1.02;
+}
+
+
+/*----------------------------------------------- NOT LOGGED IN CARD*/
+
+.notLoggedIn{
+  margin-top: 5vh;
+  width:40%;
+  background-color: var(--color-purple2);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  border-bottom: 10px solid var(--color1);
+  border-radius: 8px;
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.notLoggedIn-head{
+  width: 100%;
+  padding: 5px 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  color: var(--backcolor-black);
+  background-color: var(--color1);
+
+  border-top-left-radius:8px;
+  border-top-right-radius:8px;
+}
+
+.notLoggedIn-body{
+  margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.notLoggedIn-body button{
+  padding: 8px 15px ;
+  border-radius: 7px;
+  font-weight: bold;
+  cursor: pointer;
+  border: 2px solid var(--color1);
+  background:none;
+  color: var(--color1);
+}
+
+.notLoggedIn-body button:hover{
+  transition: 0.2s;
+  scale: 1.1;
+  border: 2px solid white;
+  background:white;
+  color: var(--backcolor-black);
+}
+
+.notLoggedIn-body img{
+  margin-top: 2rem;
+  width: 80%;
+}

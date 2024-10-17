@@ -1,6 +1,5 @@
-
 .deleteArea{
-  height: 12rem;
+  height: 7rem;
   min-width: 215px;
   margin: 1rem 0;
 
@@ -14,7 +13,6 @@
   border-radius: 8px;
 }
 
-
 .deleteArea-tittle{
   padding: 5px;
 
@@ -22,7 +20,6 @@
   color: var(--backcolor-black);
   background-color:var(--color-red1);
 }
-
 
 .active{
   background-color: var(--color-red1);

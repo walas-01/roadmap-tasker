@@ -1,14 +1,22 @@
 import { useContext, useEffect} from 'react'
+import {useNavigate} from 'react-router-dom'
 import React from 'react'
 
 import { GlobalContext } from './Context/BoardContext.jsx'
 import './BoardPage_style.css'
+
+import boardFetcher from '../../axios/boardMethods.js'
+import groupFetcher from '../../axios/groupMethods.js'
 
 // --------- components import
 import Todo from '../../components/TodoBlock/TodoBlock.jsx'
 import DeleteArea from '../../components/DeleteArea/DeleteArea.jsx'
 import {Board,BoardNavigator} from '../../components/Board/Board.jsx'
 import {WelcomeMsg} from '../../components/Popup/Popup.jsx'
+import userFetcher from '../../axios/userMethods.js'
+
+import sketchImg from '../../imgs/sketch1.png'
+import { RiLogoutCircleLine } from "react-icons/ri"
 
 // ----------------------------------------------------------------------------- mackup data
 const des = 'lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s'
@@ -38,52 +46,104 @@ const BOARD_DATA = [
 ]
 
 function BoardPage(){ // --------------------------------------------------------------------------- [ BoardPage COMPONENT ]  
-  const {setGroupList,boardList,setBoardList} = useContext(GlobalContext)
+  const {setGroupList,boardList,setBoardList,activeUser,setActiveUser } = useContext(GlobalContext)
+
 
   useEffect(()=>{ // ------------------- useEffect
-    ////todo: THIS IS THE PART WHERE WE FETCH DATA (with axios) FROM DATABASE AND SET THE STATES
-    ////todo: MUST SET BOTH THE Group STATE AND THE Board STATE
-    setGroupList(GROUP_DATA)
-    setBoardList(BOARD_DATA)
+
+    const start = async()=>{
+      try {
+        const boardRes = await boardFetcher.GET()
+        const groupRes = await groupFetcher.GET()
+
+        setBoardList(boardRes.data)
+        setGroupList(groupRes.data)
+
+        setActiveUser(true) // set the activeUser
+      } catch (err) {
+        console.log(err)
+        if(err.response && err.response.status === 403){setActiveUser(null)} // no activeUser
+      }
+    }
+
+    start()
   },[])
 
   return ( ///--------------------------- (return)
-    <main className="boardPage">
+    <section className="boardPage">
 
-      <section className="sideBar">
+      {activeUser?
+        <>
+          <aside className="sideBar">
+            <div className='innerSideBar'>
 
-        <div className='innerSideBar'>
+              <RoadMapTasker />
 
-          <RoadMapTasker />
+              <Todo />
+              <DeleteArea />
+            </div>
+          </aside>
 
-          <Todo />
-          <DeleteArea />
-        </div>
-      </section>
-
-
-
-      <section className="board">
-        <BoardNavigator/> 
-
-      {boardList.length !== 0?
-        <Board />:
-        <WelcomeMsg/>
+          <main className="board">
+            <BoardNavigator/> 
+            {boardList.length !== 0?
+              <Board />:
+              <WelcomeMsg/>
+            }
+          </main>
+        </> :
+        <NotLoggedInCard/>
       }
 
-      </section>
-
-
-
-    </main>
+    </section>
   );
 }
 
 function RoadMapTasker(){
+  const navigator = useNavigate()
+
+  const handleLogOut = async ()=>{
+    try {
+      await userFetcher.logout()
+      navigator('/login')
+    } catch (err) {console.log(err)}
+  }
+
+
   return(
     <div className='roadMapTasker'>
-      <h1>RoadMap Tasker</h1>
+      <div className='roadMapTasker-head'>
+        <h1>RoadMap Tasker</h1>
+      </div>
+      <div className='roadMapTasker-body'>
+        <button onClick={handleLogOut}><RiLogoutCircleLine size={20} />Log Out</button>
+      </div>
     </div>
+  )
+}
+
+function NotLoggedInCard(){
+  const navigator = useNavigate()
+
+  const handleOnClick = ()=>{
+    navigator('/login')
+  }
+
+  return(
+    <>
+      <div className='notLoggedIn'>
+        <div className='notLoggedIn-head'>
+          <h2>Welcome to RoadMapTasker!</h2>
+        </div>
+
+        <div className='notLoggedIn-body'>
+          <p>Looks like you are not logged in. Sign in to start managing your tasks!</p>
+          <button onClick={handleOnClick}>Sign in / Log In</button>
+          <img src={sketchImg} alt="website sketch" />
+        </div>
+      </div>
+    
+    </>
   )
 }
 

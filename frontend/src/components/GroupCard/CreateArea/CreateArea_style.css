@@ -26,6 +26,10 @@
   border-radius: 10rem;
   cursor: pointer;
 }
+.createForm-buttons-add:hover{
+  background-color: var(--color1);
+  scale: 1.1;
+}
 .createForm-buttons-cancel{
   padding: 5px 15px;
 

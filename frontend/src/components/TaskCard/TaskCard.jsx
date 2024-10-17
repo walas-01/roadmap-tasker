@@ -7,6 +7,7 @@ import { GoGrabber } from "react-icons/go"
 import { ImCheckboxUnchecked,ImCheckboxChecked } from "react-icons/im"
 import { RiArrowDownSFill,RiArrowUpSFill } from "react-icons/ri"
 import { FaRegEdit } from "react-icons/fa";
+import icon1 from '../../imgs/roadIcon1.png'
 
 const EditingTask = ({taskObject,setIsEditing})=>{
   const [newTittle,setNewTittle] = useState(taskObject.tittle)
@@ -100,7 +101,7 @@ function TaskCard({taskObject}){ // --------------------------------------------
 
         <li className={`taskCard ${isDone?"doneTask":""}`} draggable onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
 
-          <div className={`taskCard-head`}>
+          <div className='taskCard-head'>
             <div className='taskCard-icons'>
               <GoGrabber size={30}/>
               <button onClick={handleCheckButton}>

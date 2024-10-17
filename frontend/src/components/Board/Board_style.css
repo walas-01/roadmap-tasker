@@ -65,4 +65,57 @@
   scale: 1.2;
 }
 
-/*-------------------------------------------------------- [ Board ] ----*/
+/*------------------------------------------------------------------ Board message */
+
+.boardMsg{
+  width: 35%;
+  margin-bottom: 2rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 5%;
+
+  color: white;
+  background-color:var(--color-blue2);
+  border-radius: 20px;
+  
+  border-right: 20px solid var(--color-blue1);
+}
+
+.boardMsg img{
+  max-height: 6rem;
+}
+
+.boardMsg-text{
+  line-height: 1.5rem;
+}
+
+.boardMsg-text h3{
+  margin-bottom: 10px;
+}
+
+.boardMsg-text button{
+  min-width: 8rem;
+
+  margin-right: 10%;
+  padding: 8px 5px;
+  background:none;
+
+  border: 3px solid var(--color-blue1);
+  border-radius: 8px;
+  font-weight: bold;
+
+  color: var(--color-blue1);
+}
+
+
+.boardMsg-text button:hover{
+  cursor: pointer;
+  transition: 0.1s;
+  scale: 1.1;
+
+  border: 3px solid var(--color-red1);
+  color: var(--color-red1);
+}
+

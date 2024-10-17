@@ -30,7 +30,7 @@ function CreateBoardPopup({controlState,tittleState,func}){
           <h2>Create Board</h2>
         </div>
         <div className='boardPopup-body'>
-          <input type="text" placeholder='board name' onChange={handleOnChange}/>
+          <input autoFocus type="text" placeholder='board name' onChange={handleOnChange}/>
           <div className='boardPopup-buttons'>
             <button className='boardPopup-cancelButton' onClick={handleCancel}>Cancel</button>
             <button className='boardPopup-deleteButton'onClick={handleOkButton}>Create</button>

@@ -5,13 +5,19 @@ import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 
 // --- Pages
 import BoardPage from './pages/BoardPage/BoardPage.jsx'
+import LoginPage from './pages/LoginPage/LoginPage.jsx'
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage.jsx'
 
 //---- Router
 const router = createBrowserRouter([
   {
-    path:'/board',
+    path:'/',
     element:<BoardPage/>,
+    errorElement:<NotFoundPage/>
+  },
+  {
+    path:'/login',
+    element:<LoginPage/>,
     errorElement:<NotFoundPage/>
   }
 ])
