@@ -1,21 +1,6 @@
 import axios from 'axios'
 
-
 const userFetcher = {}
-
-
-userFetcher.getAllUsers = async()=>{
-  let getUsersCFG = {
-    method: 'get',
-    maxBodyLength: Infinity,
-    url: (import.meta.env.VITE_SERVER_URL,'/api/users'),
-  }
-  try {
-    const data = await axios.request(getUsersCFG)
-    return data
-  } catch (err) {console.log()}
-}
-
 
 userFetcher.register = async(username,email,password)=>{ //----------- [ register ] -
   let registerConfig = {

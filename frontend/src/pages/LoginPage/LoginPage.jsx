@@ -10,19 +10,6 @@ import icon2 from '../../imgs/icon2.png'
 
 
 function LoginPage(){ //------------------------------------------------------- [ Main Component ] -
-
-  useEffect(()=>{
-
-    const getU = async()=>{
-      try {
-        const res = await userFetcher.getAllUsers()
-      } catch (err) {console.log(err)}
-    }
-
-    getU()
-  },[])
-
-
   return(
     <section className='loginPage' >
       <div className='panel'>

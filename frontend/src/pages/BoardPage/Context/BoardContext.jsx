@@ -18,10 +18,10 @@ function ContextBoard({children}){
   // * -----------------
 
   useEffect(()=>{
-    console.log("--[GroupList]:")
-    console.log(groupList)
-    console.log("--[BoardList]:")
-    console.log(boardList)
+    //console.log("--[GroupList]:")
+    //console.log(groupList)
+    //console.log("--[BoardList]:")
+    //console.log(boardList)
 
     findStaredTasks()
   },[groupList,boardList])
