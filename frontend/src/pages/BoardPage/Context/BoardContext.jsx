@@ -311,6 +311,11 @@ function ContextBoard({children}){
     //4) also update stared tasks
     findStaredTasks()
 
+    if(boardList.length > 0){
+      setActiveBoardId(boardList[0].board_id)
+      setActiveBoardTittle(boardList[0].tittle)
+    }
+
     try {
       boardFetcher.DELETE(activeBoardId)
     } catch (err) {console.log()}

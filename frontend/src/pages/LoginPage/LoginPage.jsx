@@ -93,9 +93,6 @@ function SignInForm(){ //------------------------------------- [ SIGN IN ] -
   )
 }
 
-
-
-
 function LoginForm(){ //------------------------------------- [ LOGIN ] -
   const [loginObject,setLoginObject] = useState({})
   const [error,setError] = useState('')
@@ -111,7 +108,6 @@ function LoginForm(){ //------------------------------------- [ LOGIN ] -
     try {
       const response = await userFetcher.login(loginObject.email,loginObject.password)
       console.log(response.data)
-
 
       setError('Ok!')
       navigator('/')
