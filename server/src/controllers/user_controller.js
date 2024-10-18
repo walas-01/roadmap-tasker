@@ -68,7 +68,7 @@ userController.login = asyncWrap(async(req,res,next)=>{ // ---------------------
   res.cookie('access_token',token,{
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production', 
-    sameSite: 'strict',
+    sameSite: 'None',
     maxAge: 60 * 60 * 1000 * 24 * 15,
   }).status(200).send({message:'User logged in. Session started.'})
 })
